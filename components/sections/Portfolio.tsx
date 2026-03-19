@@ -11,93 +11,102 @@ const projects = [
     title: "Mode & Lifestyle",
     category: "E-commerce",
     tags: ["Shopify", "Meta Ads"],
-    metric: "+340% CA",
-    metricSub: "en 3 mois",
-    gradient: "from-purple-600/20 via-violet-800/10 to-transparent",
-    accent: "#7c3aed",
+    metric: "+340%",
+    metricLabel: "de chiffre d'affaires",
+    period: "en 3 mois",
     emoji: "👗",
-    bg: "bg-gradient-to-br from-purple-900/40 to-violet-950/20",
+    gradient: "from-purple-600/30 to-violet-900/20",
+    accentColor: "#a855f7",
+    borderColor: "border-purple-500/20",
   },
   {
     title: "Cosmétiques Premium",
     category: "Social Media",
     tags: ["Instagram", "TikTok", "Reels"],
-    metric: "+18K",
-    metricSub: "abonnés en 2 mois",
-    gradient: "from-pink-600/20 via-rose-800/10 to-transparent",
-    accent: "#ec4899",
+    metric: "+18 000",
+    metricLabel: "abonnés qualifiés",
+    period: "en 2 mois",
     emoji: "💄",
-    bg: "bg-gradient-to-br from-pink-900/40 to-rose-950/20",
+    gradient: "from-pink-600/30 to-rose-900/20",
+    accentColor: "#ec4899",
+    borderColor: "border-pink-500/20",
   },
   {
-    title: "Formation en ligne",
+    title: "Formation en Ligne",
     category: "Ads",
-    tags: ["Google Ads", "YouTube"],
-    metric: "4.2x ROAS",
-    metricSub: "CPA réduit de 60%",
-    gradient: "from-amber-600/20 via-orange-800/10 to-transparent",
-    accent: "#f59e0b",
+    tags: ["Google Ads", "YouTube Ads"],
+    metric: "4.2×",
+    metricLabel: "ROAS · CPA −60%",
+    period: "dès le 2e mois",
     emoji: "🎓",
-    bg: "bg-gradient-to-br from-amber-900/40 to-orange-950/20",
+    gradient: "from-amber-600/30 to-orange-900/20",
+    accentColor: "#f59e0b",
+    borderColor: "border-amber-500/20",
   },
   {
     title: "Artisan Local",
     category: "Design",
-    tags: ["Flyers", "Carte", "Logo"],
-    metric: "Identité complète",
-    metricSub: "Print & Digital",
-    gradient: "from-teal-600/20 via-emerald-800/10 to-transparent",
-    accent: "#14b8a6",
+    tags: ["Flyers", "Carte Visite", "Logo"],
+    metric: "100%",
+    metricLabel: "Identité visuelle",
+    period: "Print & Digital",
     emoji: "🛠️",
-    bg: "bg-gradient-to-br from-teal-900/40 to-emerald-950/20",
+    gradient: "from-teal-600/30 to-emerald-900/20",
+    accentColor: "#14b8a6",
+    borderColor: "border-teal-500/20",
   },
   {
-    title: "Fitness & Coach",
+    title: "Coach Fitness",
     category: "E-commerce",
     tags: ["WooCommerce", "Meta Ads"],
-    metric: "+280% ventes",
-    metricSub: "programme en ligne",
-    gradient: "from-indigo-600/20 via-blue-800/10 to-transparent",
-    accent: "#6366f1",
+    metric: "+280%",
+    metricLabel: "ventes programme en ligne",
+    period: "sur 60 jours",
     emoji: "💪",
-    bg: "bg-gradient-to-br from-indigo-900/40 to-blue-950/20",
+    gradient: "from-indigo-600/30 to-blue-900/20",
+    accentColor: "#6366f1",
+    borderColor: "border-indigo-500/20",
   },
   {
     title: "Restaurant Premium",
     category: "Social Media",
-    tags: ["Instagram", "Facebook", "Stories"],
-    metric: "+2400",
-    metricSub: "réservations générées",
-    gradient: "from-orange-600/20 via-red-800/10 to-transparent",
-    accent: "#f97316",
+    tags: ["Instagram", "Facebook"],
+    metric: "+2 400",
+    metricLabel: "réservations générées",
+    period: "en 4 mois",
     emoji: "🍽️",
-    bg: "bg-gradient-to-br from-orange-900/40 to-red-950/20",
+    gradient: "from-orange-600/30 to-red-900/20",
+    accentColor: "#f97316",
+    borderColor: "border-orange-500/20",
   },
 ];
 
 export default function Portfolio() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
   const [active, setActive] = useState("Tous");
 
-  const filtered = active === "Tous" ? projects : projects.filter((p) => p.category === active);
+  const filtered = active === "Tous"
+    ? projects
+    : projects.filter((p) => p.category === active);
 
   return (
-    <section id="resultats" className="relative py-32 overflow-hidden">
+    <section id="resultats" className="relative py-20 md:py-28 lg:py-40 overflow-hidden">
       <div className="absolute inset-0 section-glow-left" />
 
-      <div ref={ref} className="max-w-7xl mx-auto px-6">
+      <div ref={ref} className="max-w-7xl mx-auto px-6 lg:px-10">
+
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-14"
+          transition={{ duration: 0.9 }}
+          className="max-w-3xl mx-auto text-center mb-10 md:mb-14 lg:mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-sm text-purple-300 font-medium mb-6">
+          <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass-purple text-sm text-purple-300 font-medium mb-8">
             ✦ Nos Réalisations
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight mb-6">
             Résultats concrets,
             <br />
             <span className="gradient-text">clients satisfaits</span>
@@ -109,16 +118,16 @@ export default function Portfolio() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-3 mb-10 md:mb-14 lg:mb-16"
         >
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
                 active === cat
-                  ? "shimmer-btn text-white shadow-lg"
-                  : "glass text-gray-400 hover:text-white hover:glass-purple"
+                  ? "shimmer-btn text-white shadow-lg shadow-purple-500/20"
+                  : "glass text-gray-400 hover:text-white hover:glass-purple border border-white/[0.06]"
               }`}
             >
               {cat}
@@ -126,71 +135,73 @@ export default function Portfolio() {
           ))}
         </motion.div>
 
-        {/* Grid */}
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Grid — 2 colonnes max */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filtered.map((project, i) => (
             <motion.div
               key={project.title}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className={`group relative ${project.bg} border border-white/[0.05] rounded-2xl p-7 overflow-hidden hover:border-white/10 transition-all duration-300 cursor-pointer`}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.08 }}
+              className={`group relative bg-gradient-to-br ${project.gradient} border ${project.borderColor} rounded-3xl p-9 overflow-hidden hover:scale-[1.02] transition-all duration-400 cursor-pointer`}
             >
-              {/* Hover glow */}
+              {/* Glow */}
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: `radial-gradient(ellipse at 50% 0%, ${project.accent}22, transparent 70%)` }}
+                className="absolute -inset-4 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-3xl -z-10"
+                style={{ background: `${project.accentColor}15` }}
+              />
+              {/* Top line */}
+              <div
+                className="absolute top-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: `linear-gradient(90deg, transparent, ${project.accentColor}, transparent)` }}
               />
 
-              {/* Top accent */}
-              <div
-                className="absolute top-0 left-0 right-0 h-0.5 opacity-60 group-hover:opacity-100 transition-opacity"
-                style={{ background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)` }}
-              />
+              {/* Header */}
+              <div className="flex items-start justify-between mb-8">
+                <div
+                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl border"
+                  style={{
+                    background: `${project.accentColor}18`,
+                    borderColor: `${project.accentColor}30`,
+                  }}
+                >
+                  {project.emoji}
+                </div>
+                <ArrowUpRight
+                  size={22}
+                  className="text-gray-600 group-hover:text-white group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-200"
+                />
+              </div>
 
-              <div className="relative z-10">
-                {/* Emoji + category */}
-                <div className="flex items-start justify-between mb-5">
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl"
-                    style={{ background: `${project.accent}22`, border: `1px solid ${project.accent}33` }}
+              {/* Title */}
+              <h3 className="text-2xl font-black text-white mb-3 leading-tight">{project.title}</h3>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 rounded-full text-xs font-semibold text-gray-400 bg-white/[0.05] border border-white/[0.08]"
                   >
-                    {project.emoji}
-                  </div>
-                  <ArrowUpRight
-                    size={18}
-                    className="text-gray-600 group-hover:text-white group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all"
-                  />
-                </div>
+                    {tag}
+                  </span>
+                ))}
+              </div>
 
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-purple-100 transition-colors">
-                  {project.title}
-                </h3>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 rounded-md text-xs text-gray-400 bg-white/[0.04] border border-white/[0.06]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Metric */}
-                <div className="border-t border-white/[0.05] pt-4">
-                  <p className="text-2xl font-black" style={{ color: project.accent }}>
-                    {project.metric}
-                  </p>
-                  <p className="text-xs text-gray-500 mt-0.5">{project.metricSub}</p>
-                </div>
+              {/* Metric */}
+              <div className="border-t border-white/[0.06] pt-6">
+                <p
+                  className="text-4xl font-black leading-none mb-1"
+                  style={{ color: project.accentColor }}
+                >
+                  {project.metric}
+                </p>
+                <p className="text-white font-semibold text-base mt-2">{project.metricLabel}</p>
+                <p className="text-gray-500 text-sm mt-1">{project.period}</p>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
