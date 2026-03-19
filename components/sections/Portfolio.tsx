@@ -26,14 +26,14 @@ export default function Portfolio() {
       <div className="absolute inset-0 section-glow-left" />
 
       <div ref={ref} className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="max-w-2xl mx-auto text-center mb-8 md:mb-14">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="max-w-2xl mx-auto text-center mb-8 md:mb-14">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Réalisations</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
             Résultats concrets,<br /><span className="gradient-text">clients satisfaits</span>
           </h2>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 15 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.2 }} className="flex flex-wrap justify-center gap-2 mb-8 md:mb-12">
+        <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.5, delay: 0.2 }} className="flex flex-wrap justify-center gap-2 mb-8 md:mb-12">
           {categories.map((cat) => (
             <button key={cat} onClick={() => setActive(cat)} className={`px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition-all duration-200 ${active === cat ? "shimmer-btn text-white" : "glass text-gray-400 hover:text-white border border-white/[0.06]"}`}>
               {cat}

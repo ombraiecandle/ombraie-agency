@@ -56,7 +56,7 @@ export default function Contact() {
       <div ref={ref} className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10">
 
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="text-center mb-10 md:mb-16">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="text-center mb-10 md:mb-16">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Démarrons ensemble</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
             Parlons de <span className="gradient-text">votre projet</span>
@@ -67,7 +67,7 @@ export default function Contact() {
         <div className="grid lg:grid-cols-[1fr_1.4fr] gap-6 lg:gap-10 xl:gap-14">
 
           {/* ─── Left panel ─── */}
-          <motion.div initial={{ opacity: 0, x: -30 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="flex flex-col gap-5">
+          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} className="flex flex-col gap-5">
 
             {/* Email card */}
             <a href="mailto:contact@ombraie.agency" className="group relative glass rounded-2xl p-5 md:p-6 border border-white/[0.05] hover:border-purple-500/25 overflow-hidden transition-all duration-300">
@@ -136,7 +136,7 @@ export default function Contact() {
           </motion.div>
 
           {/* ─── Right panel — Form ─── */}
-          <motion.div initial={{ opacity: 0, x: 30 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}>
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}>
 
             <AnimatePresence mode="wait">
               {sent ? (

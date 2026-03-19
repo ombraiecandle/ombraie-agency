@@ -21,7 +21,7 @@ export default function Testimonials() {
       <div className="absolute inset-0 section-glow-right" />
 
       <div ref={ref} className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="max-w-2xl mx-auto text-center mb-10 md:mb-16">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="max-w-2xl mx-auto text-center mb-10 md:mb-16">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Témoignages</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
             Ils nous font <span className="gradient-text">confiance</span>
@@ -34,7 +34,7 @@ export default function Testimonials() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {testimonials.map((t, i) => (
-            <motion.div key={t.name} initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: i * 0.09 }}
+            <motion.div key={t.name} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.6, delay: i * 0.09 }}
               className="glass rounded-2xl p-6 md:p-7 hover:glass-purple transition-all duration-300 flex flex-col gap-5"
             >
               <div className="flex gap-0.5">

@@ -19,7 +19,7 @@ export default function Process() {
       <div className="absolute inset-0 section-glow-right" />
 
       <div ref={ref} className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }} className="max-w-2xl mx-auto text-center mb-10 md:mb-16">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="max-w-2xl mx-auto text-center mb-10 md:mb-16">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Notre Méthode</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
             Un process <span className="gradient-text">éprouvé</span>,<br />des résultats garantis
@@ -32,7 +32,7 @@ export default function Process() {
             <motion.div
               key={step.num}
               initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="group relative glass rounded-2xl p-7 md:p-8 border border-white/[0.05] hover:border-white/10 overflow-hidden transition-all duration-400"
             >
