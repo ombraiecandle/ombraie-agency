@@ -73,13 +73,23 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-gray-400 hover:text-white transition-colors p-2"
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Mobile : téléphone + hamburger */}
+          <div className="md:hidden flex items-center gap-2">
+            <a
+              href="tel:+33624003820"
+              className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-purple-300 rounded-lg border border-purple-500/30"
+              style={{ background: "rgba(124,58,237,0.1)" }}
+            >
+              <Phone size={13} />
+              Appeler
+            </a>
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="text-gray-400 hover:text-white transition-colors p-2"
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -107,12 +117,23 @@ export default function Navbar() {
               </motion.a>
             ))}
             <motion.a
+              href="tel:+33624003820"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.32 }}
+              className="flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-bold text-purple-300 border border-purple-500/30"
+              style={{ background: "rgba(124,58,237,0.12)" }}
+            >
+              <Phone size={16} />
+              06 24 00 38 20
+            </motion.a>
+            <motion.a
               href="#contact"
               onClick={() => setMenuOpen(false)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.35 }}
-              className="mt-4 px-6 py-3 text-center text-sm font-bold text-white shimmer-btn rounded-xl"
+              transition={{ delay: 0.4 }}
+              className="px-6 py-3 text-center text-sm font-bold text-white shimmer-btn rounded-xl"
             >
               Démarrer un projet
             </motion.a>
