@@ -30,23 +30,23 @@ export default function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "py-3 glass border-b border-white/[0.06]"
-            : "py-5 bg-transparent"
+          scrolled ? "py-3 glass border-b border-white/[0.06]" : "py-5 bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <a href="#" className="group">
-            <OmbraieLogoSVG size={36} showText={true} />
+        <div className="max-w-7xl mx-auto px-5 flex items-center justify-between gap-4">
+
+          {/* Logo */}
+          <a href="#" className="flex-shrink-0">
+            <OmbraieLogoSVG size={32} showText={true} />
           </a>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop links — lg+ only */}
+          <div className="hidden lg:flex items-center gap-6">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-gray-400 hover:text-white transition-colors duration-200 relative group"
+                className="text-sm text-gray-400 hover:text-white transition-colors duration-200 relative group whitespace-nowrap"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-purple-500 to-violet-400 group-hover:w-full transition-all duration-300" />
@@ -54,22 +54,23 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* CTA */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Desktop CTAs — md+ */}
+          <div className="hidden md:flex items-center gap-2 flex-shrink-0">
             <a
               href="tel:+33624003820"
-              className="flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-purple-300 rounded-lg border border-purple-500/25 hover:border-purple-500/50 hover:text-white transition-all duration-200"
+              className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-purple-300 rounded-lg border border-purple-500/25 hover:border-purple-500/50 hover:text-white transition-all duration-200 whitespace-nowrap"
               style={{ background: "rgba(124,58,237,0.08)" }}
             >
               <Phone size={14} />
-              06 24 00 38 20
+              <span className="hidden xl:inline">06 24 00 38 20</span>
+              <span className="xl:hidden">Appeler</span>
             </a>
             <a
               href="#contact"
-              className="relative px-5 py-2.5 text-sm font-semibold text-white rounded-lg overflow-hidden group"
+              className="relative px-4 py-2.5 text-sm font-semibold text-white rounded-lg overflow-hidden group whitespace-nowrap"
             >
               <span className="absolute inset-0 shimmer-btn rounded-lg opacity-90 group-hover:opacity-100 transition-opacity" />
-              <span className="relative z-10">Démarrer un projet</span>
+              <span className="relative z-10">Démarrer</span>
             </a>
           </div>
 
