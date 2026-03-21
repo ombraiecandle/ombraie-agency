@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import OmbraieLogoSVG from "../ui/OmbraieLogoSVG";
 
 const links = [
@@ -55,7 +55,15 @@ export default function Navbar() {
           </div>
 
           {/* CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            <a
+              href="tel:+33624003820"
+              className="flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-purple-300 rounded-lg border border-purple-500/25 hover:border-purple-500/50 hover:text-white transition-all duration-200"
+              style={{ background: "rgba(124,58,237,0.08)" }}
+            >
+              <Phone size={14} />
+              06 24 00 38 20
+            </a>
             <a
               href="#contact"
               className="relative px-5 py-2.5 text-sm font-semibold text-white rounded-lg overflow-hidden group"
