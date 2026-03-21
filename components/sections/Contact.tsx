@@ -29,12 +29,12 @@ export default function Contact() {
           transition={{ duration: 0.7 }}
           className="section-header"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Démarrons ensemble</span>
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ On vous répond sous 24h</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
-            Parlons de <span className="gradient-text">votre projet</span>
+            Un message suffit<br /><span className="gradient-text">pour démarrer</span>
           </h2>
           <p className="text-gray-400 text-base" style={{ maxWidth: "32rem" }}>
-            Audit gratuit · Réponse sous 24h · Sans engagement
+            Dites-nous ce que vous faites et ce que vous voulez. On s&apos;occupe du reste — gratuitement.
           </p>
         </motion.div>
 
@@ -165,8 +165,8 @@ export default function Contact() {
                   style={{ background: "rgba(255,255,255,0.02)" }}
                 >
                   <div>
-                    <h3 className="text-xl font-black text-white mb-1">Demande de rappel gratuit</h3>
-                    <p className="text-gray-500 text-sm">3 champs · 30 secondes · On s&apos;occupe du reste.</p>
+                    <h3 className="text-xl font-black text-white mb-1">Laissez-nous vos coordonnées</h3>
+                    <p className="text-gray-500 text-sm">30 secondes · On vous rappelle gratuitement sous 24h.</p>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -189,9 +189,9 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Votre projet en 2 lignes</label>
+                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Votre activité en 2 mots</label>
                     <textarea
-                      rows={4} placeholder="Parlez-nous de votre activité et de vos objectifs..."
+                      rows={4} placeholder="Ex : je vends des produits en ligne et je veux plus de ventes..."
                       value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                       className={INPUT} style={{ resize: "none" }}
                     />
@@ -202,7 +202,7 @@ export default function Contact() {
                     className="group relative flex items-center justify-center gap-2.5 w-full py-4 text-base font-bold text-white rounded-xl overflow-hidden"
                   >
                     <span className="absolute inset-0 shimmer-btn" />
-                    <span className="relative z-10">Obtenir mon audit gratuit</span>
+                    <span className="relative z-10">Je veux qu&apos;on m&apos;appelle gratuitement</span>
                     <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
                   </button>
 

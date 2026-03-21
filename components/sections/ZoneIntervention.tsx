@@ -53,14 +53,14 @@ export default function ZoneIntervention() {
               </span>
 
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-5">
-                Une agence locale,<br />
-                <span className="gradient-text">des résultats concrets</span>
+                Proche de chez vous,<br />
+                <span className="gradient-text">disponibles pour vous</span>
               </h2>
 
               <p className="text-gray-400 text-[15px] leading-relaxed mb-8" style={{ maxWidth: "480px" }}>
-                Basés à <strong className="text-white">Martres-Tolosane</strong>, nous accompagnons les entrepreneurs
-                et e-commerçants de toute la <strong className="text-white">Haute-Garonne</strong> —
-                du village à la métropole. Proximité garantie, résultats mesurables.
+                On est basés à <strong className="text-white">Martres-Tolosane</strong>, en Haute-Garonne.
+                On peut se rencontrer en vrai, on connaît le tissu local, et on comprend les enjeux des entreprises de la région —
+                de l&apos;artisan au commerçant en passant par la boutique en ligne.
               </p>
 
               {/* Services badges */}
@@ -89,10 +89,10 @@ export default function ZoneIntervention() {
                     <Zap size={15} className="text-purple-300" />
                   </div>
                   <div>
-                    <p className="text-white font-bold text-sm mb-1">Pourquoi travailler avec une agence locale ?</p>
+                    <p className="text-white font-bold text-sm mb-1">Pourquoi c&apos;est un avantage pour vous</p>
                     <p className="text-gray-400 text-sm leading-relaxed">
-                      Nous connaissons le tissu économique local — artisans, commerces, PME, e-commerçants.
-                      Rendez-vous en présentiel possibles, réactivité maximale, et une vraie compréhension de vos enjeux terrain.
+                      On n&apos;est pas une grosse agence parisienne qui ne vous connaît pas.
+                      Vous avez un interlocuteur direct, joignable rapidement, qui comprend votre marché local et peut se déplacer si besoin.
                     </p>
                   </div>
                 </div>

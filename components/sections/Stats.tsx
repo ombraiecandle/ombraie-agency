@@ -7,8 +7,8 @@ import { Users, TrendingUp, BarChart2, Star } from "lucide-react";
 const stats = [
   {
     value: 50, prefix: "+", suffix: "",
-    label: "Clients accompagnés",
-    sub: "E-commerce · B2B · Créateurs",
+    label: "Clients qui vendent plus",
+    sub: "Boutiques, artisans, entreprises locales",
     color: "#a855f7",
     glow: "rgba(168,85,247,0.35)",
     bg: "from-purple-600/15 via-violet-900/10 to-transparent",
@@ -17,8 +17,8 @@ const stats = [
   },
   {
     value: 2, prefix: "+", suffix: "M€",
-    label: "de CA générés",
-    sub: "Pour nos clients en cumulé",
+    label: "de revenus générés",
+    sub: "Pour l'ensemble de nos clients",
     color: "#f59e0b",
     glow: "rgba(245,158,11,0.35)",
     bg: "from-amber-600/15 via-orange-900/10 to-transparent",
@@ -27,8 +27,8 @@ const stats = [
   },
   {
     value: 3.8, prefix: "", suffix: "×",
-    label: "ROAS Moyen",
-    sub: "Sur nos campagnes Ads",
+    label: "€ récupérés par € investi",
+    sub: "En publicité en ligne (moyenne)",
     color: "#34d399",
     glow: "rgba(52,211,153,0.35)",
     bg: "from-emerald-600/15 via-teal-900/10 to-transparent",
@@ -37,8 +37,8 @@ const stats = [
   },
   {
     value: 95, prefix: "", suffix: "%",
-    label: "Taux de satisfaction",
-    sub: "Sur l'ensemble des missions",
+    label: "de clients satisfaits",
+    sub: "Ils recommandent nos services",
     color: "#818cf8",
     glow: "rgba(129,140,248,0.35)",
     bg: "from-indigo-600/15 via-blue-900/10 to-transparent",
@@ -102,7 +102,7 @@ export default function Stats() {
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ En chiffres</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05]">
-            Des résultats qui <span className="gradient-text">parlent d&apos;eux-mêmes</span>
+            Ce que nos clients <span className="gradient-text">ont obtenu</span>
           </h2>
         </motion.div>
 

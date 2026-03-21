@@ -6,36 +6,36 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   {
-    q: "Où est basée Ombraie Agency ?",
-    a: "Nous sommes basés à Martres-Tolosane (31220), en Haute-Garonne. Nous intervenons sur toute la zone — Cazères, Boussens, Aurignac, Salies-du-Salat, Carbonne, Rieux-Volvestre, Muret et Toulouse — et accompagnons aussi des clients partout en France grâce à notre approche 100% digitale.",
+    q: "Est-ce que c'est vraiment gratuit pour commencer ?",
+    a: "Oui, complètement. Le premier échange — par téléphone ou message — est 100% gratuit et sans aucun engagement. On vous donne notre avis honnête sur ce qui peut fonctionner pour vous. Si vous voulez aller plus loin, on vous propose une offre. Sinon, aucun problème.",
   },
   {
-    q: "Quel est le délai pour créer un site web ?",
-    a: "Un site vitrine est livré en 2 à 3 semaines. Un site e-commerce Shopify ou sur-mesure est livré en 3 à 6 semaines selon la complexité. Nous respectons les délais — c'est un engagement.",
+    q: "Je n'y connais rien au digital. Est-ce que c'est pour moi ?",
+    a: "C'est exactement pour vous. Vous n'avez pas besoin de connaître quoi que ce soit — c'est notre travail. On vous explique tout simplement, on prend en charge l'exécution, et vous voyez les résultats. Vous gardez votre énergie pour votre métier.",
   },
   {
-    q: "Quel budget faut-il prévoir pour lancer des publicités ?",
-    a: "Pour Meta Ads (Facebook/Instagram), nous recommandons un budget publicitaire minimum de 300–500€/mois pour obtenir des données exploitables. Pour Google Ads, 500–800€/mois minimum. Ces budgets sont séparés de nos honoraires de gestion.",
+    q: "Combien de temps avant de voir des résultats ?",
+    a: "Pour les publicités, les premières statistiques arrivent dès les premiers jours. Des résultats significatifs se voient généralement entre 4 et 8 semaines. Pour un site web, il est livré en 2 à 4 semaines. On ne vous fait jamais attendre des mois pour voir quelque chose.",
   },
   {
-    q: "Proposez-vous un audit gratuit ?",
-    a: "Oui, le premier échange est 100% gratuit et sans engagement. Nous analysons votre présence digitale, votre marché et vos concurrents, puis vous présentons une stratégie personnalisée sous 24h.",
+    q: "Combien ça coûte ?",
+    a: "Ça dépend de ce dont vous avez besoin. On s'adapte à chaque situation — une petite entreprise locale n'a pas le même budget qu'une boutique en ligne. Le mieux est d'en parler directement : on trouve toujours une solution qui correspond à votre budget.",
   },
   {
-    q: "Comment se passe le suivi des campagnes publicitaires ?",
-    a: "Vous recevez un reporting mensuel complet avec tous les indicateurs clés : ROAS, CPA, CTR, conversions, dépenses. Nous organisons un appel de suivi mensuel pour analyser les résultats et ajuster la stratégie.",
+    q: "Est-ce que vous vous occupez vraiment de tout ?",
+    a: "Oui. Dès que vous nous confiez votre projet, on gère tout : création des contenus, publications, publicités, suivi des résultats, ajustements. Vous recevez un compte-rendu clair chaque mois. Vous n'avez rien à faire si ce n'est approuver et encaisser.",
   },
   {
-    q: "Pouvez-vous gérer les réseaux sociaux de A à Z ?",
-    a: "Oui. Nous nous occupons de tout : stratégie éditoriale, création de contenu (visuels, vidéos, captions), publication, gestion de la communauté et analyse des performances. Vous n'avez rien à faire.",
+    q: "Vous travaillez avec des entreprises dans mon secteur ?",
+    a: "On travaille avec toutes sortes d'entreprises : boutiques en ligne, restaurants, artisans, coachs, professions libérales, PME locales... Si vous avez des clients à trouver ou des ventes à faire, on peut vous aider.",
   },
   {
-    q: "Travaillez-vous avec des petites entreprises locales ?",
-    a: "Absolument. Nous accompagnons aussi bien des artisans, commerçants et PME de la région (Cazères, Aurignac, Carbonne, Muret...) que des e-commerçants ou startups. Nos offres sont adaptées à chaque taille d'entreprise.",
+    q: "Vous êtes basés où ? Peut-on se rencontrer ?",
+    a: "On est basés à Martres-Tolosane, en Haute-Garonne (31). On intervient dans toute la région — Cazères, Aurignac, Carbonne, Muret, Toulouse — et on peut se déplacer pour se rencontrer en vrai. Pour les clients hors région, on travaille très bien à distance.",
   },
   {
-    q: "Puis-je voir des exemples de résultats concrets ?",
-    a: "Oui, notre section Réalisations présente des exemples réels de campagnes publicitaires avec les métriques obtenues (ROAS, CA généré, CPA) et des sites web que nous avons créés. Nous pouvons aussi partager des références clients sur demande.",
+    q: "Que se passe-t-il si les résultats ne sont pas là ?",
+    a: "On ne vous abandonne pas. Si une approche ne fonctionne pas assez bien, on l'ajuste. On vous dit honnêtement ce qui marche et ce qui ne marche pas — pas de jargon, pas de faux-semblants. Notre réputation, c'est vos résultats.",
   },
 ];
 
@@ -102,10 +102,10 @@ export default function FAQ() {
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ FAQ</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
-            Questions <span className="gradient-text">fréquentes</span>
+            Vous avez des <span className="gradient-text">questions ?</span>
           </h2>
           <p className="text-gray-400 text-base" style={{ maxWidth: "36rem" }}>
-            Tout ce que vous devez savoir avant de démarrer avec nous.
+            Voici les vraies questions que nous posent nos clients avant de démarrer.
           </p>
         </motion.div>
 
@@ -123,8 +123,8 @@ export default function FAQ() {
           className="mt-10 rounded-2xl p-6 md:p-8 border border-purple-500/15 text-center"
           style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(5,5,8,0.6) 100%)" }}
         >
-          <p className="text-white font-bold text-base mb-2">Votre question n&apos;est pas listée ?</p>
-          <p className="text-gray-400 text-sm mb-4">On répond à toutes vos questions en moins de 24h.</p>
+          <p className="text-white font-bold text-base mb-2">Vous avez une autre question ?</p>
+          <p className="text-gray-400 text-sm mb-4">Posez-la directement — on vous répond honnêtement, sans jargon.</p>
           <a
             href="#contact"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white relative overflow-hidden"

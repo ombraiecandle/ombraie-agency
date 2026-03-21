@@ -5,10 +5,10 @@ import { useRef } from "react";
 import { ArrowRight, Phone } from "lucide-react";
 
 const steps = [
-  { num: "01", icon: "🔍", title: "Audit & Stratégie", desc: "Analyse de votre marché, concurrents et présence actuelle. Stratégie sur-mesure avec des objectifs clairs et mesurables dès le départ.", detail: "Semaine 1", accent: "#7c3aed" },
-  { num: "02", icon: "🎨", title: "Création & Production", desc: "Notre équipe crée tous les assets : visuels, vidéos, copies, landing pages. Tout validé avec vous avant lancement — zéro surprise.", detail: "Semaine 2", accent: "#4f46e5" },
-  { num: "03", icon: "🚀", title: "Lancement & Diffusion", desc: "Déploiement sur tous vos canaux. Monitoring en temps réel, optimisation quotidienne pour maximiser chaque euro investi.", detail: "Semaine 3", accent: "#8b5cf6" },
-  { num: "04", icon: "📊", title: "Analyse & Scaling", desc: "Rapports hebdomadaires transparents. On identifie ce qui performe, on arrête ce qui ne convertit pas, on scale ce qui marche.", detail: "En continu", accent: "#f59e0b" },
+  { num: "01", icon: "🔍", title: "On apprend à vous connaître", desc: "Premier échange gratuit : vous nous parlez de votre activité, vos clients, vos objectifs. On regarde ce qui existe déjà et on construit une stratégie faite pour vous — pas un modèle copié-collé.", detail: "Semaine 1", accent: "#7c3aed" },
+  { num: "02", icon: "🎨", title: "On prépare tout", desc: "Visuels, vidéos, textes, pages web… On crée tout le contenu dont vous avez besoin. Vous validez avant qu'on lance — vous restez maître de votre image à 100%.", detail: "Semaine 2", accent: "#4f46e5" },
+  { num: "03", icon: "🚀", title: "On lance et on diffuse", desc: "Vos contenus et publicités partent en ligne. On surveille tout au quotidien pour que chaque euro dépensé rapporte le maximum.", detail: "Semaine 3", accent: "#8b5cf6" },
+  { num: "04", icon: "📊", title: "Vous voyez les résultats", desc: "Chaque mois, on vous envoie un rapport simple et clair : combien de personnes touchées, combien de clics, combien de ventes. On ajuste ensemble ce qui peut encore mieux marcher.", detail: "En continu", accent: "#f59e0b" },
 ];
 
 export default function Process() {
@@ -23,9 +23,9 @@ export default function Process() {
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="section-header">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Notre Méthode</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
-            Un process <span className="gradient-text">éprouvé</span>,<br />des résultats garantis
+            Comment ça <span className="gradient-text">se passe</span> concrètement
           </h2>
-          <p className="text-gray-400 text-base">Accompagnement structuré en 4 phases pour maximiser l&apos;impact dès le premier mois.</p>
+          <p className="text-gray-400 text-base">De votre premier message jusqu&apos;aux premiers résultats — voici exactement ce qu&apos;on fait pour vous.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-5 md:gap-6" style={{ alignItems: "start" }}>

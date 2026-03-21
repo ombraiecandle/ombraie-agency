@@ -56,11 +56,10 @@ export default function Services() {
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="section-header">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Nos Services</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
-            Une agence <span className="gradient-text">full-service</span>
-            <br />pour votre croissance
+            Tout ce qu&apos;il faut pour<br /><span className="gradient-text">attirer plus de clients</span>
           </h2>
           <p className="text-gray-400 text-base leading-relaxed">
-            De la stratégie social media à la création de votre boutique — on pilote tous les leviers de votre présence digitale.
+            Que vous démarriez de zéro ou que vous vouliez passer à la vitesse supérieure — on s&apos;occupe de votre présence en ligne de A à Z.
           </p>
         </motion.div>
 
