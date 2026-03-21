@@ -18,7 +18,7 @@ export default function CTA() {
       {/* Centered glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-purple-700/15 blur-[120px] rounded-full pointer-events-none" />
 
-      <div ref={ref} className="relative max-w-4xl mx-auto px-5 text-center">
+      <div ref={ref} className="relative section-container" style={{ textAlign: "center" }}>
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} className="flex flex-col items-center gap-6 md:gap-8">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium">
             ⚡ Prêt à accélérer votre croissance ?
