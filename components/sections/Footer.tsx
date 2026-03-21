@@ -11,19 +11,23 @@ const links = {
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/[0.05] overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-purple-950/5 to-transparent" />
+    <footer className="relative overflow-hidden" style={{ borderTop: "1px solid rgba(124,58,237,0.2)" }}>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-purple-950/8 to-transparent" />
 
-      <div className="relative max-w-7xl mx-auto px-5 md:px-8 lg:px-10 py-12 md:py-16">
+      <div className="relative section-container py-12 md:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-10 md:mb-14">
 
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <OmbraieLogoSVG size={34} showText className="mb-5" />
-            <p className="text-sm text-gray-500 leading-relaxed mb-5 max-w-xs">
+            <p className="text-sm text-gray-500 leading-relaxed mb-3 max-w-xs">
               Agence marketing & digital spécialisée pour les e-commerçants et entreprises ambitieux.
             </p>
+            <div className="flex items-center gap-1.5 mb-5">
+              <span className="text-gray-600 text-xs">📍</span>
+              <span className="text-xs text-gray-600">Martres-Tolosane · Haute-Garonne (31)</span>
+            </div>
             <div className="flex gap-2.5">
               {[{ Icon: Instagram, href: "#", label: "Instagram" }, { Icon: Facebook, href: "#", label: "Facebook" }, { Icon: Linkedin, href: "#", label: "LinkedIn" }, { Icon: Mail, href: "mailto:contact@ombraie.agency", label: "Email" }].map(({ Icon, href, label }) => (
                 <a key={label} href={href} aria-label={label} className="w-9 h-9 rounded-lg glass hover:glass-purple flex items-center justify-center text-gray-500 hover:text-purple-300 transition-all duration-200">

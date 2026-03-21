@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { ArrowRight } from "lucide-react";
 
 const services = [
   {
@@ -47,12 +48,12 @@ export default function Services() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="services" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+    <section id="services" className="relative py-16 md:py-24 lg:py-32 overflow-hidden section-divider-top">
       <div className="absolute inset-0 section-glow-left" />
       <div className="absolute inset-0 section-glow-right" />
 
-      <div ref={ref} className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="max-w-2xl mx-auto text-center mb-10 md:mb-16">
+      <div ref={ref} className="section-container">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="section-header">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Nos Services</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
             Une agence <span className="gradient-text">full-service</span>
@@ -63,7 +64,7 @@ export default function Services() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" style={{ alignItems: "start" }}>
           {services.map((s, i) => (
             <motion.div
               key={s.number}
@@ -82,7 +83,7 @@ export default function Services() {
               </div>
 
               <h3 className="text-lg font-bold text-white mb-3 leading-tight group-hover:text-purple-100 transition-colors">{s.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-5 group-hover:text-gray-300 transition-colors">{s.desc}</p>
+              <p className="text-gray-400 text-sm md:text-[15px] leading-relaxed mb-5 group-hover:text-gray-300 transition-colors">{s.desc}</p>
 
               <div className="flex flex-wrap gap-1.5">
                 {s.tags.map((tag) => (
@@ -94,6 +95,31 @@ export default function Services() {
             </motion.div>
           ))}
         </div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 md:mt-16"
+        >
+          <a
+            href="#contact"
+            className="group relative inline-flex items-center gap-2.5 px-8 py-4 text-sm font-bold text-white rounded-xl overflow-hidden"
+          >
+            <span className="absolute inset-0 shimmer-btn" />
+            <span className="relative z-10">Discutons de votre projet</span>
+            <ArrowRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+          </a>
+          <a
+            href="#processus"
+            className="text-sm text-gray-400 hover:text-white transition-colors font-medium flex items-center gap-1.5 group"
+          >
+            Voir notre méthode
+            <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );

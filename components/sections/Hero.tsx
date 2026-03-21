@@ -43,11 +43,18 @@ export default function Hero() {
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
       <div className="absolute inset-0 grid-bg" />
       <div className="absolute inset-0 radial-glow" />
-      <div className="absolute inset-0 opacity-50 pointer-events-none">
+
+      {/* 3D scene — full background */}
+      <div className="absolute inset-0 opacity-70 pointer-events-none">
         <HeroScene />
       </div>
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full bg-purple-700/10 blur-[140px] pulse-anim pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-500/8 blur-[120px] float-anim pointer-events-none" />
+
+      {/* Radial dark overlay — centre plus sombre pour lisibilité texte */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(5,5,8,0.55) 0%, transparent 80%)" }} />
+
+      {/* Ambient glows */}
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] rounded-full bg-purple-700/10 blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet-500/8 blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 py-32 flex flex-col items-center text-center gap-6 md:gap-8">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
@@ -66,7 +73,7 @@ export default function Hero() {
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.0] tracking-tight text-white">vers le sommet.</h1>
         </motion.div>
 
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.55 }} className="text-base md:text-lg lg:text-xl text-gray-400 leading-relaxed max-w-xl font-light">
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.55 }} className="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-xl font-light">
           Social Media · Paid Ads · Création de Contenu · Sites Web &amp; Design Graphique
         </motion.p>
 
@@ -114,7 +121,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2 }} className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
         <div className="w-5 h-9 rounded-full border border-white/10 flex items-start justify-center pt-1.5">
           <div className="w-1 h-2 rounded-full bg-purple-400 animate-bounce" />
         </div>

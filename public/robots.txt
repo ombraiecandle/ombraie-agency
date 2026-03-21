@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ombraie-agency.vercel.app/sitemap.xml

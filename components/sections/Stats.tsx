@@ -2,6 +2,7 @@
 
 import { motion, useInView, useMotionValue, animate } from "framer-motion";
 import { useRef, useEffect } from "react";
+import { Users, TrendingUp, BarChart2, Star } from "lucide-react";
 
 const stats = [
   {
@@ -12,7 +13,7 @@ const stats = [
     glow: "rgba(168,85,247,0.35)",
     bg: "from-purple-600/15 via-violet-900/10 to-transparent",
     border: "rgba(168,85,247,0.2)",
-    icon: "🤝",
+    Icon: Users,
   },
   {
     value: 2, prefix: "+", suffix: "M€",
@@ -22,7 +23,7 @@ const stats = [
     glow: "rgba(245,158,11,0.35)",
     bg: "from-amber-600/15 via-orange-900/10 to-transparent",
     border: "rgba(245,158,11,0.2)",
-    icon: "💰",
+    Icon: TrendingUp,
   },
   {
     value: 3.8, prefix: "", suffix: "×",
@@ -32,7 +33,7 @@ const stats = [
     glow: "rgba(52,211,153,0.35)",
     bg: "from-emerald-600/15 via-teal-900/10 to-transparent",
     border: "rgba(52,211,153,0.2)",
-    icon: "📈",
+    Icon: BarChart2,
   },
   {
     value: 95, prefix: "", suffix: "%",
@@ -42,7 +43,7 @@ const stats = [
     glow: "rgba(129,140,248,0.35)",
     bg: "from-indigo-600/15 via-blue-900/10 to-transparent",
     border: "rgba(129,140,248,0.2)",
-    icon: "⭐",
+    Icon: Star,
   },
 ];
 
@@ -74,7 +75,7 @@ function CountUp({ value, prefix = "", suffix = "", color }: { value: number; pr
   return (
     <span
       ref={ref}
-      className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-black leading-none tabular-nums"
+      className="text-5xl sm:text-6xl lg:text-7xl font-black leading-none tabular-nums whitespace-nowrap"
       style={{ color }}
     >
       {prefix}{fmt(value, value)}{suffix}
@@ -89,7 +90,7 @@ export default function Stats() {
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/25 to-transparent" />
       <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/25 to-transparent" />
 
-      <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10">
+      <div className="section-container">
 
         {/* Header */}
         <motion.div
@@ -99,8 +100,8 @@ export default function Stats() {
           transition={{ duration: 0.7 }}
           className="text-center mb-10 md:mb-16"
         >
-          <p className="text-gray-500 text-xs tracking-[0.3em] uppercase font-semibold mb-3">En chiffres</p>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ En chiffres</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05]">
             Des résultats qui <span className="gradient-text">parlent d&apos;eux-mêmes</span>
           </h2>
         </motion.div>
@@ -148,10 +149,10 @@ export default function Stats() {
 
                 {/* Icon */}
                 <div
-                  className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center text-xl md:text-2xl border flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
-                  style={{ background: `${stat.color}15`, borderColor: `${stat.color}25` }}
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center border flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+                  style={{ background: `${stat.color}15`, borderColor: `${stat.color}30` }}
                 >
-                  {stat.icon}
+                  <stat.Icon size={20} style={{ color: stat.color }} />
                 </div>
 
                 {/* Number — with 3D perspective */}
@@ -169,7 +170,7 @@ export default function Stats() {
                   >
                     {/* Shadow layer for 3D depth */}
                     <span
-                      className="absolute inset-0 text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-black leading-none tabular-nums blur-[10px] opacity-30 select-none"
+                      className="absolute inset-0 text-5xl sm:text-6xl lg:text-7xl font-black leading-none tabular-nums blur-[10px] opacity-30 select-none whitespace-nowrap"
                       style={{ color: stat.color, transform: "translateZ(-8px) translateY(4px)" }}
                       aria-hidden
                     >
@@ -182,7 +183,7 @@ export default function Stats() {
                 {/* Label */}
                 <div className="mt-1">
                   <p className="text-white font-bold text-sm md:text-base leading-tight">{stat.label}</p>
-                  <p className="text-gray-500 text-xs mt-1 leading-relaxed hidden sm:block">{stat.sub}</p>
+                  <p className="text-gray-500 text-xs mt-1 leading-relaxed">{stat.sub}</p>
                 </div>
 
                 {/* Animated glow ring */}

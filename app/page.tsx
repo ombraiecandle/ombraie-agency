@@ -5,6 +5,8 @@ import Stats from "@/components/sections/Stats";
 import Process from "@/components/sections/Process";
 import Portfolio from "@/components/sections/Portfolio";
 import Testimonials from "@/components/sections/Testimonials";
+import ZoneIntervention from "@/components/sections/ZoneIntervention";
+import FAQ from "@/components/sections/FAQ";
 import CTA from "@/components/sections/CTA";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
@@ -19,6 +21,8 @@ export default function Home() {
       <Process />
       <Portfolio />
       <Testimonials />
+      <ZoneIntervention />
+      <FAQ />
       <CTA />
       <Contact />
       <Footer />

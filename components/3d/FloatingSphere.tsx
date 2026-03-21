@@ -32,78 +32,92 @@ export default function FloatingSphere() {
 
   return (
     <group>
-      {/* Outer distorted sphere */}
-      <Sphere ref={meshRef} args={[1.5, 64, 64]}>
+      {/* Outer distorted sphere — bigger, more opaque */}
+      <Sphere ref={meshRef} args={[1.8, 64, 64]}>
         <MeshDistortMaterial
           color="#7c3aed"
           attach="material"
-          distort={0.35}
-          speed={1.5}
-          roughness={0.1}
-          metalness={0.9}
+          distort={0.4}
+          speed={1.8}
+          roughness={0.05}
+          metalness={0.95}
           transparent
-          opacity={0.5}
+          opacity={0.75}
           wireframe={false}
         />
       </Sphere>
 
       {/* Inner glowing sphere */}
-      <Sphere ref={innerRef} args={[0.9, 32, 32]}>
+      <Sphere ref={innerRef} args={[1.1, 32, 32]}>
         <meshStandardMaterial
           color="#a855f7"
           emissive="#7c3aed"
-          emissiveIntensity={0.8}
+          emissiveIntensity={1.2}
           transparent
-          opacity={0.3}
-          roughness={0.2}
+          opacity={0.45}
+          roughness={0.1}
           metalness={1}
         />
       </Sphere>
 
-      {/* Core */}
-      <Sphere args={[0.3, 16, 16]}>
+      {/* Core gold */}
+      <Sphere args={[0.38, 16, 16]}>
         <meshStandardMaterial
           color="#f59e0b"
           emissive="#f59e0b"
-          emissiveIntensity={2}
+          emissiveIntensity={3}
           transparent
-          opacity={0.9}
+          opacity={1}
           roughness={0}
           metalness={1}
         />
       </Sphere>
 
-      {/* Orbit ring */}
+      {/* Orbit ring 1 */}
       <mesh ref={ringRef} rotation={[Math.PI / 4, 0, 0]}>
-        <torusGeometry args={[2, 0.015, 8, 120]} />
+        <torusGeometry args={[2.4, 0.022, 8, 140]} />
         <meshStandardMaterial
           color="#7c3aed"
-          emissive="#7c3aed"
+          emissive="#a855f7"
+          emissiveIntensity={2}
+          transparent
+          opacity={0.8}
+          roughness={0}
+          metalness={1}
+        />
+      </mesh>
+
+      {/* Orbit ring 2 */}
+      <mesh rotation={[Math.PI / 2.5, Math.PI / 6, 0]}>
+        <torusGeometry args={[2.9, 0.012, 8, 120]} />
+        <meshStandardMaterial
+          color="#f59e0b"
+          emissive="#f59e0b"
           emissiveIntensity={1.5}
           transparent
           opacity={0.5}
           roughness={0}
-          metalness={1}
         />
       </mesh>
 
-      {/* Second ring */}
-      <mesh rotation={[Math.PI / 2.5, Math.PI / 6, 0]}>
-        <torusGeometry args={[2.4, 0.008, 8, 100]} />
+      {/* Orbit ring 3 — thin outer */}
+      <mesh rotation={[-Math.PI / 3, Math.PI / 4, 0]}>
+        <torusGeometry args={[3.3, 0.006, 8, 100]} />
         <meshStandardMaterial
-          color="#f59e0b"
-          emissive="#f59e0b"
+          color="#c084fc"
+          emissive="#c084fc"
           emissiveIntensity={1}
           transparent
-          opacity={0.3}
+          opacity={0.35}
           roughness={0}
         />
       </mesh>
 
-      {/* Ambient lights */}
-      <pointLight color="#7c3aed" intensity={3} position={[2, 2, 2]} distance={8} />
-      <pointLight color="#f59e0b" intensity={1.5} position={[-2, -1, 1]} distance={6} />
-      <ambientLight intensity={0.3} />
+      {/* Stronger lights */}
+      <pointLight color="#7c3aed" intensity={6} position={[3, 3, 3]} distance={10} />
+      <pointLight color="#f59e0b" intensity={3} position={[-3, -2, 2]} distance={8} />
+      <pointLight color="#a855f7" intensity={2} position={[0, -3, 2]} distance={7} />
+      <ambientLight intensity={0.5} />
     </group>
   );
 }

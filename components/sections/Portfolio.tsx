@@ -4,12 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import AdResults from "../portfolio/AdResults";
 import SiteMockups from "../portfolio/SiteMockups";
-import FlyerGallery from "../portfolio/FlyerGallery";
 
 const tabs = [
   { id: "ads", label: "Résultats Publicités", icon: "🎯", count: 3 },
   { id: "sites", label: "Sites Web", icon: "🌐", count: 3 },
-  { id: "flyers", label: "Flyers & Design", icon: "🎨", count: 10 },
 ];
 
 export default function Portfolio() {
@@ -19,7 +17,7 @@ export default function Portfolio() {
     <section id="resultats" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 section-glow-left" />
 
-      <div className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10">
+      <div className="section-container">
 
         {/* Header */}
         <motion.div
@@ -27,7 +25,7 @@ export default function Portfolio() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7 }}
-          className="max-w-2xl mx-auto text-center mb-10 md:mb-14"
+          className="section-header"
         >
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Nos Réalisations</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
@@ -42,11 +40,12 @@ export default function Portfolio() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="flex flex-wrap justify-center gap-3 mb-10 md:mb-14"
+          style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0.75rem", marginBottom: "3.5rem" }}
         >
           {tabs.map((tab) => (
             <button
               key={tab.id}
+              type="button"
               onClick={() => setActive(tab.id)}
               className={`flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-bold transition-all duration-300 border ${
                 active === tab.id
@@ -64,17 +63,17 @@ export default function Portfolio() {
         </motion.div>
 
         {/* Content */}
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           <motion.div
             key={active}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            style={{ minHeight: "400px" }}
           >
             {active === "ads" && <AdResults />}
             {active === "sites" && <SiteMockups />}
-            {active === "flyers" && <FlyerGallery />}
           </motion.div>
         </AnimatePresence>
       </div>

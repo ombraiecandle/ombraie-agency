@@ -17,11 +17,11 @@ export default function Testimonials() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="temoignages" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+    <section id="temoignages" className="relative py-16 md:py-24 lg:py-32 overflow-hidden section-divider-top section-divider-bottom section-alt-bg">
       <div className="absolute inset-0 section-glow-right" />
 
-      <div ref={ref} className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="max-w-2xl mx-auto text-center mb-10 md:mb-16">
+      <div ref={ref} className="section-container">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="section-header">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Témoignages</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
             Ils nous font <span className="gradient-text">confiance</span>
@@ -32,16 +32,19 @@ export default function Testimonials() {
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" style={{ alignItems: "start" }}>
           {testimonials.map((t, i) => (
             <motion.div key={t.name} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.6, delay: i * 0.09 }}
-              className="glass rounded-2xl p-6 md:p-7 hover:glass-purple transition-all duration-300 flex flex-col gap-5"
+              className="glass rounded-2xl p-6 md:p-7 hover:glass-purple transition-all duration-300 flex flex-col gap-4"
             >
               <div className="flex gap-0.5">
                 {[...Array(5)].map((_, si) => <span key={si} className="text-amber-400 text-base">★</span>)}
               </div>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
-              <span className={`text-sm font-bold ${t.metricColor}`}>📈 {t.metric}</span>
+              <p className="text-gray-300 text-[15px] leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
+              <span className={`inline-flex items-center text-sm font-bold px-3 py-1.5 rounded-full border ${t.metricColor}`}
+                style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.08)" }}>
+                ↑ {t.metric}
+              </span>
               <div className="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
                 <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${t.gradient} flex items-center justify-center font-black text-white text-sm flex-shrink-0`}>{t.initials}</div>
                 <div>

@@ -8,7 +8,7 @@ import ParticleField from "./ParticleField";
 export default function HeroScene() {
   return (
     <Canvas
-      camera={{ position: [0, 0, 6], fov: 50 }}
+      camera={{ position: [0, 0, 7], fov: 58 }}
       style={{ width: "100%", height: "100%" }}
       gl={{ antialias: true, alpha: true }}
     >

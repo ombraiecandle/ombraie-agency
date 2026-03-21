@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { ArrowRight, Phone } from "lucide-react";
 
 const steps = [
   { num: "01", icon: "🔍", title: "Audit & Stratégie", desc: "Analyse de votre marché, concurrents et présence actuelle. Stratégie sur-mesure avec des objectifs clairs et mesurables dès le départ.", detail: "Semaine 1", accent: "#7c3aed" },
@@ -18,8 +19,8 @@ export default function Process() {
     <section id="processus" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 section-glow-right" />
 
-      <div ref={ref} className="max-w-7xl mx-auto px-5 md:px-8 lg:px-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="max-w-2xl mx-auto text-center mb-10 md:mb-16">
+      <div ref={ref} className="section-container">
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="section-header">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Notre Méthode</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
             Un process <span className="gradient-text">éprouvé</span>,<br />des résultats garantis
@@ -27,7 +28,7 @@ export default function Process() {
           <p className="text-gray-400 text-base">Accompagnement structuré en 4 phases pour maximiser l&apos;impact dès le premier mois.</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+        <div className="grid md:grid-cols-2 gap-5 md:gap-6" style={{ alignItems: "start" }}>
           {steps.map((step, i) => (
             <motion.div
               key={step.num}
@@ -46,7 +47,7 @@ export default function Process() {
               </div>
 
               <h3 className="text-xl md:text-2xl font-black text-white mb-3 leading-tight">{step.title}</h3>
-              <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-5 group-hover:text-gray-300 transition-colors">{step.desc}</p>
+              <p className="text-gray-400 text-[15px] leading-relaxed mb-5 group-hover:text-gray-300 transition-colors">{step.desc}</p>
 
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border" style={{ color: step.accent, borderColor: `${step.accent}30`, background: `${step.accent}10` }}>
                 ⏱ {step.detail}
@@ -54,6 +55,39 @@ export default function Process() {
             </motion.div>
           ))}
         </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-12 md:mt-16 rounded-2xl p-6 md:p-8 border border-purple-500/15 flex flex-col md:flex-row items-center justify-between gap-5"
+          style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(5,5,8,0.6) 100%)" }}
+        >
+          <div>
+            <p className="text-white font-black text-lg md:text-xl mb-1">Prêt à démarrer ?</p>
+            <p className="text-gray-400 text-sm">Audit gratuit — on vous rappelle dans les 24h.</p>
+          </div>
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <a
+              href="tel:+33624003820"
+              className="flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold text-purple-300 border border-purple-500/30 hover:border-purple-500/60 hover:text-white transition-all duration-200"
+              style={{ background: "rgba(124,58,237,0.1)" }}
+            >
+              <Phone size={15} />
+              06 24 00 38 20
+            </a>
+            <a
+              href="#contact"
+              className="group relative inline-flex items-center gap-2 px-5 py-3 text-sm font-bold text-white rounded-xl overflow-hidden"
+            >
+              <span className="absolute inset-0 shimmer-btn" />
+              <span className="relative z-10">Audit gratuit</span>
+              <ArrowRight size={14} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

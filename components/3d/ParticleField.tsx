@@ -21,7 +21,7 @@ export default function ParticleField({ count = 1200 }: { count?: number }) {
       // Sphere distribution
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
-      const r = 3 + Math.random() * 5;
+      const r = 3.5 + Math.random() * 5.5;
 
       positions[i3] = r * Math.sin(phi) * Math.cos(theta);
       positions[i3 + 1] = r * Math.sin(phi) * Math.sin(theta);
@@ -55,10 +55,10 @@ export default function ParticleField({ count = 1200 }: { count?: number }) {
         <bufferAttribute attach="attributes-color" args={[colors, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.025}
+        size={0.035}
         vertexColors
         transparent
-        opacity={0.7}
+        opacity={0.85}
         sizeAttenuation
       />
     </points>

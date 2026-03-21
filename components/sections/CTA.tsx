@@ -9,10 +9,14 @@ export default function CTA() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-700/12 blur-[100px] rounded-full pointer-events-none" />
-      <div className="absolute inset-0 grid-bg opacity-20" />
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/25 to-transparent" />
+    <section className="relative py-20 md:py-32 overflow-hidden" style={{ background: "linear-gradient(180deg, rgba(124,58,237,0.05) 0%, rgba(10,8,18,0.95) 50%, rgba(124,58,237,0.05) 100%)" }}>
+      {/* Border lines */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
+      {/* Grid background */}
+      <div className="absolute inset-0 grid-bg opacity-30" style={{ pointerEvents: "none" }} />
+      {/* Centered glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-purple-700/15 blur-[120px] rounded-full pointer-events-none" />
 
       <div ref={ref} className="relative max-w-4xl mx-auto px-5 text-center">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }} className="flex flex-col items-center gap-6 md:gap-8">
