@@ -15,7 +15,7 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   return (
-    <section id="contact" className="relative py-16 md:py-24 overflow-hidden">
+    <section id="contact" className="relative py-24 md:py-32 lg:py-40 overflow-hidden">
       <div className="absolute inset-0 section-glow-left" style={{ pointerEvents: "none" }} />
       <div className="absolute inset-0 section-glow-right" style={{ pointerEvents: "none" }} />
 

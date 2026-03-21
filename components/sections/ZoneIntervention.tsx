@@ -26,7 +26,7 @@ const services_locaux = [
 
 export default function ZoneIntervention() {
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden" style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+    <section className="relative py-24 md:py-32 lg:py-40 overflow-hidden" style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}>
       <div className="absolute inset-0 section-glow-right" style={{ pointerEvents: "none" }} />
       <div
         className="absolute inset-0"

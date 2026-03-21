@@ -17,7 +17,7 @@ export default function Testimonials() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section id="temoignages" className="relative py-16 md:py-24 lg:py-32 overflow-hidden section-divider-top section-divider-bottom section-alt-bg">
+    <section id="temoignages" className="relative py-24 md:py-32 lg:py-40 overflow-hidden section-divider-top section-divider-bottom section-alt-bg">
       <div className="absolute inset-0 section-glow-right" />
 
       <div ref={ref} className="section-container">

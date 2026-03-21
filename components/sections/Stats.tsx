@@ -85,7 +85,7 @@ function CountUp({ value, prefix = "", suffix = "", color }: { value: number; pr
 
 export default function Stats() {
   return (
-    <section className="relative py-16 md:py-24 lg:py-28 overflow-hidden">
+    <section className="relative py-24 md:py-32 lg:py-40 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-950/8 to-transparent" />
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/25 to-transparent" />
       <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/25 to-transparent" />

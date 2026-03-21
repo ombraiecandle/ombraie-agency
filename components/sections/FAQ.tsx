@@ -89,7 +89,7 @@ function FAQItem({ item, index }: { item: typeof faqs[0]; index: number }) {
 
 export default function FAQ() {
   return (
-    <section id="faq" className="relative py-16 md:py-24 overflow-hidden">
+    <section id="faq" className="relative py-24 md:py-32 lg:py-40 overflow-hidden">
       <div className="absolute inset-0 section-glow-left" style={{ pointerEvents: "none" }} />
 
       <div className="section-container">

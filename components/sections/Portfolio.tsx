@@ -14,7 +14,7 @@ export default function Portfolio() {
   const [active, setActive] = useState("ads");
 
   return (
-    <section id="resultats" className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+    <section id="resultats" className="relative py-24 md:py-32 lg:py-40 overflow-hidden">
       <div className="absolute inset-0 section-glow-left" />
 
       <div className="section-container">

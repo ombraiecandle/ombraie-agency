@@ -9,7 +9,7 @@ export default function CTA() {
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden" style={{ background: "linear-gradient(180deg, rgba(124,58,237,0.05) 0%, rgba(10,8,18,0.95) 50%, rgba(124,58,237,0.05) 100%)" }}>
+    <section className="relative py-24 md:py-36 lg:py-44 overflow-hidden" style={{ background: "linear-gradient(180deg, rgba(124,58,237,0.05) 0%, rgba(10,8,18,0.95) 50%, rgba(124,58,237,0.05) 100%)" }}>
       {/* Border lines */}
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
       <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
