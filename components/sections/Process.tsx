@@ -21,11 +21,11 @@ export default function Process() {
 
       <div ref={ref} className="section-container">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="section-header">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Notre Méthode</span>
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ La Méthode Ombraie™</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
             Comment ça <span className="gradient-text">se passe</span> concrètement
           </h2>
-          <p className="text-gray-400 text-base">De votre premier message jusqu&apos;aux premiers résultats — voici exactement ce qu&apos;on fait pour vous.</p>
+          <p className="text-gray-400 text-base">De votre premier message jusqu&apos;aux premiers résultats — voici exactement ce qu&apos;on fait pour vous, étape par étape.</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-5 md:gap-6" style={{ alignItems: "start" }}>

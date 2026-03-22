@@ -125,6 +125,28 @@ export default function Contact() {
                 </div>
               ))}
             </div>
+
+            {/* Fourchette de prix */}
+            <div
+              className="rounded-2xl p-5 border border-purple-500/15"
+              style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.07) 0%, rgba(5,5,8,0.5) 100%)" }}
+            >
+              <p className="text-white font-bold text-sm mb-2">Une idée des tarifs</p>
+              <div className="flex flex-col gap-2">
+                {[
+                  { service: "Gestion réseaux sociaux", price: "à partir de 400€/mois" },
+                  { service: "Publicité en ligne (pub)", price: "à partir de 300€/mois" },
+                  { service: "Création de site vitrine", price: "à partir de 800€" },
+                  { service: "Boutique en ligne", price: "à partir de 1 500€" },
+                ].map((item) => (
+                  <div key={item.service} className="flex items-center justify-between gap-3 text-sm">
+                    <span className="text-gray-400">{item.service}</span>
+                    <span className="text-purple-300 font-semibold whitespace-nowrap">{item.price}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-gray-600 text-xs mt-3">Budget pub non inclus. Offres sur-mesure disponibles.</p>
+            </div>
           </motion.div>
 
           {/* ── RIGHT — Formulaire simple ── */}
