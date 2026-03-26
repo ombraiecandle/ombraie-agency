@@ -3,18 +3,28 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
+import { usePathname } from "next/navigation";
 import OmbraieLogoSVG from "../ui/OmbraieLogoSVG";
 
 const links = [
-  { label: "Services",    href: "#services"   },
+  { label: "Accueil",     href: "/"            },
+  { label: "Services",    href: "#services"    },
   { label: "Réalisations", href: "/realisations" },
-  { label: "Témoignages", href: "#temoignages"},
-  { label: "Contact",     href: "#contact"    },
+  { label: "Témoignages", href: "#temoignages" },
+  { label: "Contact",     href: "#contact"     },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  // Sur les sous-pages, les liens ancres doivent pointer vers /#section
+  const resolveHref = (href: string) => {
+    if (href.startsWith("#") && !isHome) return `/${href}`;
+    return href;
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -39,7 +49,7 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-5 flex items-center justify-between gap-4">
 
-          <a href="#" className="flex-shrink-0">
+          <a href="/" className="flex-shrink-0">
             <OmbraieLogoSVG size={30} showText light />
           </a>
 
@@ -47,8 +57,8 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-7">
             {links.map((link) => (
               <a
-                key={link.href}
-                href={link.href}
+                key={link.label}
+                href={resolveHref(link.href)}
                 className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200 whitespace-nowrap"
               >
                 {link.label}
@@ -107,8 +117,8 @@ export default function Navbar() {
           >
             {links.map((link, i) => (
               <motion.a
-                key={link.href}
-                href={link.href}
+                key={link.label}
+                href={resolveHref(link.href)}
                 onClick={() => setMenuOpen(false)}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}

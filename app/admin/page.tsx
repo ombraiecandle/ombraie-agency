@@ -45,6 +45,9 @@ function LoginScreen({ onLogin }: { onLogin: (token: string) => void }) {
           <h1 className="text-xl font-black text-gray-900">Panel Admin</h1>
           <p className="text-gray-500 text-sm mt-1">Gérer les réalisations</p>
         </div>
+        <a href="/" className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-600 transition-colors mb-4">
+          ← Retour au site
+        </a>
         <form onSubmit={submit} className="flex flex-col gap-4">
           <input
             type="password"
