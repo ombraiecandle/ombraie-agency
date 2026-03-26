@@ -4,9 +4,25 @@ import OmbraieLogoSVG from "../ui/OmbraieLogoSVG";
 import { Instagram, Facebook, Linkedin, Mail, Phone } from "lucide-react";
 
 const links = {
-  Services: ["Réseaux Sociaux", "Publicité en ligne", "Création de Contenu", "Site Vitrine", "Boutique en ligne", "Identité Visuelle"],
-  Agence:   ["À propos", "Notre méthode", "Témoignages", "Contact"],
-  Légal:    ["Mentions légales", "Politique de confidentialité", "CGV"],
+  Services: [
+    { label: "Réseaux Sociaux",      href: "/#services"    },
+    { label: "Publicité en ligne",   href: "/#services"    },
+    { label: "Création de Contenu",  href: "/#services"    },
+    { label: "Site Vitrine",         href: "/#services"    },
+    { label: "Boutique en ligne",    href: "/#services"    },
+    { label: "Identité Visuelle",    href: "/#services"    },
+  ],
+  Agence: [
+    { label: "Nos réalisations",     href: "/realisations" },
+    { label: "Notre méthode",        href: "/#process"     },
+    { label: "Témoignages",          href: "/#temoignages" },
+    { label: "Contact",              href: "/#contact"     },
+  ],
+  Légal: [
+    { label: "Mentions légales",             href: "#" },
+    { label: "Politique de confidentialité", href: "#" },
+    { label: "CGV",                          href: "#" },
+  ],
 };
 
 export default function Footer() {
@@ -17,7 +33,9 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <OmbraieLogoSVG size={30} showText light className="mb-5" />
+            <a href="/">
+              <OmbraieLogoSVG size={30} showText light className="mb-5" />
+            </a>
             <p className="text-sm text-gray-500 leading-relaxed mb-3 max-w-xs">
               Agence marketing & digital pour les entreprises qui veulent attirer plus de clients.
             </p>
@@ -34,15 +52,17 @@ export default function Footer() {
             </a>
             <div className="flex gap-2">
               {[
-                { Icon: Instagram, href: "#",                          label: "Instagram" },
-                { Icon: Facebook,  href: "#",                          label: "Facebook"  },
-                { Icon: Linkedin,  href: "#",                          label: "LinkedIn"  },
-                { Icon: Mail,      href: "mailto:contact@ombraie.agency", label: "Email" },
+                { Icon: Instagram, href: "https://www.instagram.com/ombraie.agency",       label: "Instagram" },
+                { Icon: Facebook,  href: "https://www.facebook.com/ombraie.agency",        label: "Facebook"  },
+                { Icon: Linkedin,  href: "https://www.linkedin.com/company/ombraie-agency",label: "LinkedIn"  },
+                { Icon: Mail,      href: "mailto:contact@ombraie.agency",                  label: "Email"     },
               ].map(({ Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="w-9 h-9 rounded-lg bg-gray-100 border border-gray-200 hover:border-purple-200 hover:bg-purple-50 flex items-center justify-center text-gray-500 hover:text-purple-700 transition-all duration-200"
                 >
                   <Icon size={15} />
@@ -56,8 +76,13 @@ export default function Footer() {
               <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">{title}</p>
               <ul className="flex flex-col gap-2.5">
                 {items.map((item) => (
-                  <li key={item}>
-                    <a href="#" className="text-sm text-gray-500 hover:text-purple-700 transition-colors duration-200">{item}</a>
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className="text-sm text-gray-500 hover:text-purple-700 transition-colors duration-200"
+                    >
+                      {item.label}
+                    </a>
                   </li>
                 ))}
               </ul>

@@ -11,6 +11,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import type { Realisation, AdsData, SiteData, FlyerData } from "@/types/realisation";
 
 // ─── DATA ────────────────────────────────────────────────────
 
@@ -1000,9 +1001,175 @@ const selectors: {
   },
 ];
 
+// ─── DYNAMIC CARDS (données Supabase) ─────────────────────────
+
+function DynamicAdCard({ r }: { r: Realisation }) {
+  const d = r.data as AdsData;
+  const accent = d.accent || "#7c3aed";
+  const roas = parseFloat(d.roas) || 2;
+  const bars = Array.from({ length: 12 }, (_, i) => {
+    const t = i / 11;
+    return Math.min(100, Math.round(18 + t * 64 + (t > 0.6 ? (t - 0.6) * roas * 45 : 0)));
+  });
+  const maxBar = Math.max(...bars);
+  const metrics = [
+    d.impressions && { label: "Impressions", value: d.impressions },
+    d.clicks && { label: "Clics", value: d.clicks },
+    d.ctr && { label: "Taux de clic", value: `${d.ctr}%` },
+    d.cpc && { label: "Coût/clic", value: `${d.cpc}€` },
+    { label: "ROAS", value: `${d.roas}×` },
+    { label: "CA généré", value: `${Number(d.ca).toLocaleString("fr-FR")}€` },
+  ].filter(Boolean) as { label: string; value: string }[];
+
+  return (
+    <div className="rounded-2xl overflow-hidden border border-gray-100" style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)" }}>
+      <div className="px-5 py-4 flex items-center justify-between" style={{ background: accent }}>
+        <div>
+          <p className="text-white font-black text-base leading-tight">{d.client}</p>
+          <p className="text-white/70 text-xs mt-0.5">{d.sector}</p>
+        </div>
+        <span className="text-xs font-bold text-white/90 px-2.5 py-1 rounded-full" style={{ background: "rgba(255,255,255,0.2)" }}>
+          {d.platform}
+        </span>
+      </div>
+      <div className="px-5 pt-5 pb-3">
+        <p className="text-xs text-gray-400 font-medium mb-3">Évolution des performances · {d.duration}</p>
+        <div className="flex items-end gap-1 h-14">
+          {bars.map((h, i) => (
+            <div key={i} className="flex-1 rounded-sm" style={{ height: `${(h / maxBar) * 100}%`, background: i === bars.length - 1 ? accent : `${accent}40` }} />
+          ))}
+        </div>
+      </div>
+      <div className="px-5 pb-5">
+        <div className="grid grid-cols-3 gap-2">
+          {metrics.slice(0, 6).map((m) => (
+            <div key={m.label} className="p-2.5 rounded-xl bg-gray-50 border border-gray-100">
+              <p className="text-gray-400 text-[10px] font-medium leading-tight mb-1">{m.label}</p>
+              <p className="text-gray-900 font-bold text-sm">{m.value}</p>
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-2 mt-3">
+          <div className="flex-1 flex items-center gap-2 px-3 py-2 rounded-xl" style={{ background: `${accent}10`, border: `1px solid ${accent}25` }}>
+            <TrendingUp size={13} style={{ color: accent }} />
+            <span className="text-xs font-bold" style={{ color: accent }}>ROAS {d.roas}×</span>
+          </div>
+          <div className="flex-1 flex items-center justify-center px-3 py-2 rounded-xl" style={{ background: `${accent}10`, border: `1px solid ${accent}25` }}>
+            <span className="text-xs font-bold" style={{ color: accent }}>+{Number(d.ca).toLocaleString("fr-FR")}€ CA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DynamicSiteCard({ r }: { r: Realisation }) {
+  const d = r.data as SiteData;
+  const accent = d.accent || "#0284c7";
+  return (
+    <div className="rounded-2xl overflow-hidden border border-gray-100" style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)" }}>
+      {/* Browser chrome */}
+      <div className="px-3 py-2 flex items-center gap-2" style={{ background: "#f0f0ee", borderBottom: "1px solid #e5e5e3" }}>
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400" /><div className="w-2.5 h-2.5 rounded-full bg-amber-400" /><div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+        </div>
+        <div className="flex-1 mx-1 px-2 py-0.5 rounded-md text-[9px] text-gray-400 flex items-center gap-1" style={{ background: "white", border: "1px solid #ddd" }}>
+          <span style={{ color: "#16a34a", fontSize: "8px" }}>🔒</span>
+          {d.url || `${d.name?.toLowerCase().replace(/\s/g, "")}.fr`}
+        </div>
+      </div>
+      {/* Hero visual */}
+      <div className="flex items-center justify-between px-6 py-8" style={{ background: `linear-gradient(135deg, ${accent}15, ${accent}08)`, minHeight: "140px" }}>
+        <div>
+          <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold mb-3" style={{ background: `${accent}15`, color: accent }}>
+            ✓ {d.type}
+          </div>
+          <p className="font-black text-xl text-gray-900 leading-tight mb-1">{d.name}</p>
+          <p className="text-gray-500 text-sm">{d.sector}</p>
+        </div>
+        <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0" style={{ background: `${accent}15`, border: `1px solid ${accent}20` }}>
+          <Monitor size={24} style={{ color: accent }} />
+        </div>
+      </div>
+      {/* Testimonial */}
+      {d.testimonial && (
+        <div className="flex items-center gap-2 px-5 py-3" style={{ background: `${accent}06`, borderTop: `1px solid ${accent}12` }}>
+          <span className="text-[10px]">⭐⭐⭐⭐⭐</span>
+          <span className="text-[11px] text-gray-500 italic truncate">&ldquo;{d.testimonial}&rdquo;</span>
+        </div>
+      )}
+      {/* Footer */}
+      <div className="px-5 py-4 border-t border-gray-100 flex items-center justify-between">
+        <div>
+          <p className="text-gray-900 font-bold text-sm">{d.name}</p>
+          <p className="text-gray-400 text-xs mt-0.5">{d.sector} · {d.type}</p>
+        </div>
+        <div className="text-right">
+          <p className="font-black text-sm" style={{ color: accent }}>{Number(d.price).toLocaleString("fr-FR")}€</p>
+          <p className="text-gray-400 text-xs">{d.delivery_time}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DynamicFlyerCard({ r }: { r: Realisation }) {
+  const d = r.data as FlyerData;
+  const c1 = d.color1 || "#7c3aed";
+  const c2 = d.color2 || "#a855f7";
+  return (
+    <div className="rounded-2xl overflow-hidden border border-gray-100" style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)" }}>
+      {/* Flyer preview */}
+      <div className="relative overflow-hidden" style={{ background: `linear-gradient(145deg, ${c1}, ${c2})`, minHeight: "200px" }}>
+        <div className="absolute inset-0 opacity-10" style={{ background: "radial-gradient(ellipse at 80% 20%, white, transparent 60%)" }} />
+        <div className="relative p-5 flex flex-col gap-3">
+          {/* Brand + tag */}
+          <div className="flex items-center justify-between">
+            <p className="text-white/60 text-[10px] font-bold uppercase tracking-widest">{d.brand}</p>
+            {d.tag && <span className="text-[10px] font-bold px-2 py-0.5 rounded" style={{ background: "rgba(255,255,255,0.2)", color: "white" }}>{d.tag}</span>}
+          </div>
+          {/* Offers */}
+          {(d.offers ?? []).filter((o) => o.label).map((o, i) => (
+            <div key={i} className="flex items-center justify-between px-3 py-2 rounded-lg" style={{ background: "rgba(255,255,255,0.1)", borderLeft: "2px solid rgba(255,255,255,0.4)" }}>
+              <span className="text-white/80 text-xs font-medium">✦ {o.label}</span>
+              <span className="text-white font-black text-sm">{o.price}</span>
+            </div>
+          ))}
+          {/* Promo */}
+          {d.promo && (
+            <div className="px-3 py-2 rounded-lg text-center" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)" }}>
+              <p className="text-white font-black text-sm">{d.promo}</p>
+            </div>
+          )}
+          {/* Address */}
+          {(d.address || d.phone) && (
+            <div className="border-t border-white/15 pt-2 space-y-0.5">
+              {d.address && <p className="text-white/50 text-[9px]">📍 {d.address}</p>}
+              {d.phone && <p className="text-white/50 text-[9px]">📞 {d.phone}</p>}
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="px-5 py-4 flex items-center justify-between">
+        <div>
+          <p className="text-gray-600 text-xs font-medium">{d.type}</p>
+          <p className="text-gray-400 text-xs mt-0.5">{d.prints}{d.prints ? " · " : ""}Livré en {d.delivery_time}</p>
+        </div>
+        <p className="font-black text-base" style={{ color: c1 }}>{Number(d.price).toLocaleString("fr-FR")}€</p>
+      </div>
+    </div>
+  );
+}
+
 // ─── MAIN ─────────────────────────────────────────────────────
 
-export default function RealisationsCarousel() {
+interface CarouselProps {
+  adsFromDB?: Realisation[];
+  sitesFromDB?: Realisation[];
+  flyersFromDB?: Realisation[];
+}
+
+export default function RealisationsCarousel({ adsFromDB = [], sitesFromDB = [], flyersFromDB = [] }: CarouselProps) {
   const [active, setActive] = useState<Tab>("sites");
   const [cardIndex, setCardIndex] = useState(0);
 
@@ -1015,12 +1182,19 @@ export default function RealisationsCarousel() {
         ? sitesPricing
         : flyersPricing;
 
+  // Utilise les données DB si disponibles, sinon les données statiques
+  const useDB = {
+    ads: adsFromDB.length > 0,
+    sites: sitesFromDB.length > 0,
+    flyers: flyersFromDB.length > 0,
+  };
+
   const cards =
     active === "ads"
-      ? adCampaigns
+      ? (useDB.ads ? adsFromDB : adCampaigns)
       : active === "sites"
-        ? websites
-        : flyers;
+      ? (useDB.sites ? sitesFromDB : websites)
+      : (useDB.flyers ? flyersFromDB : flyers);
 
   const handleTabChange = (id: Tab) => {
     setActive(id);
@@ -1166,19 +1340,23 @@ export default function RealisationsCarousel() {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Desktop: show all 3 */}
+            {/* Desktop: show all cards */}
             <div className="hidden md:grid md:grid-cols-3 gap-5 md:gap-6 mb-16">
-              {active === "ads" &&
-                adCampaigns.map((c, i) => <AdCard key={i} c={c} />)}
-              {active === "sites" &&
-                websites.map((w, i) => <WebsiteCard key={i} w={w} />)}
-              {active === "flyers" &&
-                flyers.map((f, i) => (
-                  <FlyerCard key={i} f={f} index={i} />
-                ))}
+              {active === "ads" && (useDB.ads
+                ? adsFromDB.map((r) => <DynamicAdCard key={r.id} r={r} />)
+                : adCampaigns.map((c, i) => <AdCard key={i} c={c} />)
+              )}
+              {active === "sites" && (useDB.sites
+                ? sitesFromDB.map((r) => <DynamicSiteCard key={r.id} r={r} />)
+                : websites.map((w, i) => <WebsiteCard key={i} w={w} />)
+              )}
+              {active === "flyers" && (useDB.flyers
+                ? flyersFromDB.map((r) => <DynamicFlyerCard key={r.id} r={r} />)
+                : flyers.map((f, i) => <FlyerCard key={i} f={f} index={i} />)
+              )}
             </div>
 
-            {/* Mobile: single card with nav */}
+            {/* Mobile: single card avec navigation */}
             <div className="md:hidden mb-16">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -1188,10 +1366,17 @@ export default function RealisationsCarousel() {
                   exit={{ opacity: 0, x: -40 }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  {active === "ads" && <AdCard c={adCampaigns[cardIndex]} />}
-                  {active === "sites" && <WebsiteCard w={websites[cardIndex]} />}
-                  {active === "flyers" && (
-                    <FlyerCard f={flyers[cardIndex]} index={cardIndex} />
+                  {active === "ads" && (useDB.ads
+                    ? <DynamicAdCard r={adsFromDB[cardIndex]} />
+                    : <AdCard c={adCampaigns[cardIndex]} />
+                  )}
+                  {active === "sites" && (useDB.sites
+                    ? <DynamicSiteCard r={sitesFromDB[cardIndex]} />
+                    : <WebsiteCard w={websites[cardIndex]} />
+                  )}
+                  {active === "flyers" && (useDB.flyers
+                    ? <DynamicFlyerCard r={flyersFromDB[cardIndex]} />
+                    : <FlyerCard f={flyers[cardIndex]} index={cardIndex} />
                   )}
                 </motion.div>
               </AnimatePresence>
