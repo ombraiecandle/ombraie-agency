@@ -62,8 +62,8 @@ function LoginScreen({ onLogin }: { onLogin: (token: string) => void }) {
           )}
           <button
             type="submit"
-            disabled={loading || !pw}
-            className="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold text-white disabled:opacity-50 transition-opacity"
+            disabled={loading}
+            className="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold text-white disabled:opacity-60 transition-opacity"
             style={{ background: "linear-gradient(135deg, #7c3aed, #6d28d9)" }}
           >
             {loading ? <Loader2 size={16} className="animate-spin" /> : "Se connecter"}

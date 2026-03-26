@@ -92,9 +92,12 @@ export default function Footer() {
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-gray-100">
           <p className="text-xs text-gray-400">© {new Date().getFullYear()} Ombraie Agency. Tous droits réservés.</p>
-          <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <p className="text-xs text-gray-400">Disponible pour nouveaux projets</p>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <p className="text-xs text-gray-400">Disponible pour nouveaux projets</p>
+            </div>
+            <a href="/admin" className="text-xs text-gray-300 hover:text-gray-500 transition-colors">Admin</a>
           </div>
         </div>
       </div>
