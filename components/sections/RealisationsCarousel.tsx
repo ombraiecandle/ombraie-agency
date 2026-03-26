@@ -1032,6 +1032,11 @@ function DynamicAdCard({ r }: { r: Realisation }) {
           {d.platform}
         </span>
       </div>
+      {d.image_url && (
+        <div className="overflow-hidden" style={{ maxHeight: "160px" }}>
+          <img src={d.image_url} alt={d.client} className="w-full object-cover" />
+        </div>
+      )}
       <div className="px-5 pt-5 pb-3">
         <p className="text-xs text-gray-400 font-medium mb-3">Évolution des performances · {d.duration}</p>
         <div className="flex items-end gap-1 h-14">
@@ -1079,6 +1084,11 @@ function DynamicSiteCard({ r }: { r: Realisation }) {
         </div>
       </div>
       {/* Hero visual */}
+      {d.image_url ? (
+        <div className="relative overflow-hidden" style={{ minHeight: "140px" }}>
+          <img src={d.image_url} alt={d.name} className="w-full object-cover" style={{ maxHeight: "200px" }} />
+        </div>
+      ) : (
       <div className="flex items-center justify-between px-6 py-8" style={{ background: `linear-gradient(135deg, ${accent}15, ${accent}08)`, minHeight: "140px" }}>
         <div>
           <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold mb-3" style={{ background: `${accent}15`, color: accent }}>
@@ -1091,6 +1101,7 @@ function DynamicSiteCard({ r }: { r: Realisation }) {
           <Monitor size={24} style={{ color: accent }} />
         </div>
       </div>
+      )}
       {/* Testimonial */}
       {d.testimonial && (
         <div className="flex items-center gap-2 px-5 py-3" style={{ background: `${accent}06`, borderTop: `1px solid ${accent}12` }}>
@@ -1120,6 +1131,11 @@ function DynamicFlyerCard({ r }: { r: Realisation }) {
   return (
     <div className="rounded-2xl overflow-hidden border border-gray-100" style={{ background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.06)" }}>
       {/* Flyer preview */}
+      {d.image_url ? (
+        <div className="relative overflow-hidden" style={{ minHeight: "200px" }}>
+          <img src={d.image_url} alt={d.brand} className="w-full object-cover" style={{ maxHeight: "280px" }} />
+        </div>
+      ) : (
       <div className="relative overflow-hidden" style={{ background: `linear-gradient(145deg, ${c1}, ${c2})`, minHeight: "200px" }}>
         <div className="absolute inset-0 opacity-10" style={{ background: "radial-gradient(ellipse at 80% 20%, white, transparent 60%)" }} />
         <div className="relative p-5 flex flex-col gap-3">
@@ -1150,6 +1166,7 @@ function DynamicFlyerCard({ r }: { r: Realisation }) {
           )}
         </div>
       </div>
+      )}
       <div className="px-5 py-4 flex items-center justify-between">
         <div>
           <p className="text-gray-600 text-xs font-medium">{d.type}</p>
