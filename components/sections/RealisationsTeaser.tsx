@@ -45,7 +45,7 @@ export default function RealisationsTeaser() {
     >
       <div className="section-container">
         {/* Header */}
-        <div className="section-header">
+        <div className="flex flex-col items-center text-center mb-10 md:mb-12">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-700 font-semibold mb-5">
             ✦ Nos Réalisations
           </span>
