@@ -89,8 +89,7 @@ function FAQItem({ item, index }: { item: typeof faqs[0]; index: number }) {
 
 export default function FAQ() {
   return (
-    <section id="faq" className="relative py-24 md:py-32 lg:py-40 overflow-hidden">
-      <div className="absolute inset-0 section-glow-left" style={{ pointerEvents: "none" }} />
+    <section id="faq" className="relative py-24 md:py-32 lg:py-40 overflow-hidden section-divider-top">
 
       <div className="section-container">
         <motion.div
@@ -120,14 +119,14 @@ export default function FAQ() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-10 rounded-2xl p-6 md:p-8 border border-purple-500/15 text-center"
-          style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(5,5,8,0.6) 100%)" }}
+          className="mt-10 rounded-2xl p-6 md:p-8 border border-white/[0.06] text-center"
+          style={{ background: "rgba(255,255,255,0.02)" }}
         >
           <p className="text-white font-bold text-base mb-2">Vous avez une autre question ?</p>
           <p className="text-gray-400 text-sm mb-4">Posez-la directement — on vous répond honnêtement, sans jargon.</p>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-bold text-white relative overflow-hidden"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white relative overflow-hidden"
           >
             <span className="absolute inset-0 shimmer-btn" />
             <span className="relative z-10">Poser une question →</span>

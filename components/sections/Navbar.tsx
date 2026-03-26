@@ -6,11 +6,10 @@ import { Menu, X, Phone } from "lucide-react";
 import OmbraieLogoSVG from "../ui/OmbraieLogoSVG";
 
 const links = [
-  { label: "Services", href: "#services" },
-  { label: "Processus", href: "#processus" },
-  { label: "Résultats", href: "#resultats" },
-  { label: "Témoignages", href: "#temoignages" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services",    href: "#services"   },
+  { label: "Réalisations", href: "/realisations" },
+  { label: "Témoignages", href: "#temoignages"},
+  { label: "Contact",     href: "#contact"    },
 ];
 
 export default function Navbar() {
@@ -28,65 +27,66 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "py-3 glass border-b border-white/[0.06]" : "py-5 bg-transparent"
-        }`}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        style={{
+          background: scrolled ? "rgba(250,250,249,0.95)" : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(0,0,0,0.06)" : "none",
+          paddingTop:    scrolled ? "0.75rem" : "1.25rem",
+          paddingBottom: scrolled ? "0.75rem" : "1.25rem",
+        }}
       >
         <div className="max-w-7xl mx-auto px-5 flex items-center justify-between gap-4">
 
-          {/* Logo */}
           <a href="#" className="flex-shrink-0">
-            <OmbraieLogoSVG size={32} showText={true} />
+            <OmbraieLogoSVG size={30} showText light />
           </a>
 
-          {/* Desktop links — lg+ only */}
-          <div className="hidden lg:flex items-center gap-6">
+          {/* Desktop links */}
+          <div className="hidden lg:flex items-center gap-7">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-gray-400 hover:text-white transition-colors duration-200 relative group whitespace-nowrap"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200 whitespace-nowrap"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-purple-500 to-violet-400 group-hover:w-full transition-all duration-300" />
               </a>
             ))}
           </div>
 
-          {/* Desktop CTAs — md+ */}
+          {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-2 flex-shrink-0">
             <a
               href="tel:+33624003820"
-              className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-purple-300 rounded-lg border border-purple-500/25 hover:border-purple-500/50 hover:text-white transition-all duration-200 whitespace-nowrap"
-              style={{ background: "rgba(124,58,237,0.08)" }}
+              className="flex items-center gap-2 px-3.5 py-2 text-sm font-semibold text-purple-700 rounded-full border border-purple-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 whitespace-nowrap"
             >
-              <Phone size={14} />
+              <Phone size={13} />
               <span className="hidden xl:inline">06 24 00 38 20</span>
               <span className="xl:hidden">Appeler</span>
             </a>
             <a
               href="#contact"
-              className="relative px-4 py-2.5 text-sm font-semibold text-white rounded-lg overflow-hidden group whitespace-nowrap"
+              className="relative px-5 py-2 text-sm font-bold text-white rounded-full overflow-hidden group whitespace-nowrap"
             >
-              <span className="absolute inset-0 shimmer-btn rounded-lg opacity-90 group-hover:opacity-100 transition-opacity" />
-              <span className="relative z-10">Démarrer</span>
+              <span className="absolute inset-0 shimmer-btn opacity-90 group-hover:opacity-100 transition-opacity" />
+              <span className="relative z-10">Audit gratuit</span>
             </a>
           </div>
 
-          {/* Mobile : téléphone + hamburger */}
+          {/* Mobile */}
           <div className="md:hidden flex items-center gap-2">
             <a
               href="tel:+33624003820"
-              className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-purple-300 rounded-lg border border-purple-500/30"
-              style={{ background: "rgba(124,58,237,0.1)" }}
+              className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-purple-700 rounded-full border border-purple-200 bg-purple-50"
             >
               <Phone size={13} />
               Appeler
             </a>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-gray-400 hover:text-white transition-colors p-2"
+              className="text-gray-600 hover:text-gray-900 transition-colors p-2"
             >
               {menuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -101,18 +101,19 @@ export default function Navbar() {
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 glass-purple md:hidden flex flex-col pt-28 px-8 gap-6"
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 md:hidden flex flex-col pt-28 px-8 gap-5"
+            style={{ background: "#FAFAF9" }}
           >
             {links.map((link, i) => (
               <motion.a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                initial={{ opacity: 0, x: 30 }}
+                initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.07 }}
-                className="text-2xl font-semibold text-white border-b border-white/5 pb-4"
+                transition={{ delay: i * 0.06 }}
+                className="text-2xl font-semibold text-gray-900 border-b border-gray-100 pb-4"
               >
                 {link.label}
               </motion.a>
@@ -121,9 +122,8 @@ export default function Navbar() {
               href="tel:+33624003820"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.32 }}
-              className="flex items-center justify-center gap-2 px-6 py-4 rounded-xl text-base font-bold text-purple-300 border border-purple-500/30"
-              style={{ background: "rgba(124,58,237,0.12)" }}
+              transition={{ delay: 0.28 }}
+              className="flex items-center justify-center gap-2 px-6 py-4 rounded-2xl text-base font-bold text-purple-700 border border-purple-200 bg-purple-50"
             >
               <Phone size={16} />
               06 24 00 38 20
@@ -133,10 +133,11 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="px-6 py-3 text-center text-sm font-bold text-white shimmer-btn rounded-xl"
+              transition={{ delay: 0.35 }}
+              className="relative px-6 py-4 text-center text-base font-bold text-white rounded-2xl overflow-hidden"
             >
-              Démarrer un projet
+              <span className="absolute inset-0 shimmer-btn" />
+              <span className="relative z-10">Démarrer mon projet →</span>
             </motion.a>
           </motion.div>
         )}

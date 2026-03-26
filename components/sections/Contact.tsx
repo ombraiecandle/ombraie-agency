@@ -4,21 +4,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ArrowRight, Phone, MessageCircle, Mail, Check } from "lucide-react";
 
-const PHONE = "06 24 00 38 20";
+const PHONE      = "06 24 00 38 20";
 const PHONE_HREF = "tel:+33624003820";
-const WA_HREF = "https://wa.me/33624003820";
+const WA_HREF    = "https://wa.me/33624003820";
 
-const INPUT = "w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm placeholder-gray-600 focus:outline-none focus:border-purple-500/50 focus:bg-purple-500/[0.04] transition-all duration-200";
+const INPUT = "w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:border-purple-400 focus:bg-white transition-all duration-200";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   return (
-    <section id="contact" className="relative py-24 md:py-32 lg:py-40 overflow-hidden">
-      <div className="absolute inset-0 section-glow-left" style={{ pointerEvents: "none" }} />
-      <div className="absolute inset-0 section-glow-right" style={{ pointerEvents: "none" }} />
-
+    <section id="contact" className="relative py-24 md:py-32 lg:py-40" style={{ background: "#F3F0FF", borderTop: "1px solid rgba(124,58,237,0.08)" }}>
       <div className="section-container">
 
         {/* Header */}
@@ -29,18 +26,20 @@ export default function Contact() {
           transition={{ duration: 0.7 }}
           className="section-header"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ On vous répond sous 24h</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-700 font-semibold mb-5">
+            ✦ On vous répond sous 24h
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 leading-[1.05] mb-4">
             Un message suffit<br /><span className="gradient-text">pour démarrer</span>
           </h2>
-          <p className="text-gray-400 text-base" style={{ maxWidth: "32rem" }}>
+          <p className="text-gray-500 text-base" style={{ maxWidth: "32rem" }}>
             Dites-nous ce que vous faites et ce que vous voulez. On s&apos;occupe du reste — gratuitement.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-6 xl:gap-10">
 
-          {/* ── LEFT — CTAs directs ── */}
+          {/* LEFT — CTAs directs */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -48,48 +47,45 @@ export default function Contact() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col gap-4"
           >
-            {/* Phone CTA — principal */}
+            {/* Phone */}
             <a
               href={PHONE_HREF}
-              className="group relative rounded-2xl p-6 md:p-7 overflow-hidden border border-purple-500/25 flex items-center gap-5 transition-all duration-300 hover:border-purple-500/50 hover:scale-[1.01]"
-              style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.15) 0%, rgba(124,58,237,0.05) 100%)" }}
+              className="group rounded-2xl p-6 md:p-7 border border-purple-200 flex items-center gap-5 transition-all duration-300 hover:border-purple-300 hover:shadow-md"
+              style={{ background: "white" }}
             >
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: "radial-gradient(ellipse 60% 60% at 20% 50%, rgba(124,58,237,0.12), transparent)" }} />
               <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 relative z-10"
-                style={{ background: "linear-gradient(135deg, #7c3aed, #a855f7)", boxShadow: "0 8px 24px rgba(124,58,237,0.4)" }}
+                className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                style={{ background: "linear-gradient(135deg, #7c3aed, #a855f7)" }}
               >
                 <Phone size={22} className="text-white" />
               </div>
-              <div className="relative z-10 flex-1">
-                <p className="text-xs font-semibold text-purple-300 uppercase tracking-wider mb-1">Appel direct</p>
-                <p className="text-2xl font-black text-white tracking-tight">{PHONE}</p>
+              <div className="flex-1">
+                <p className="text-xs font-semibold text-purple-600 uppercase tracking-wider mb-1">Appel direct</p>
+                <p className="text-2xl font-black text-gray-900 tracking-tight">{PHONE}</p>
                 <p className="text-sm text-gray-400 mt-0.5">Lun–Ven · 9h–18h</p>
               </div>
-              <ArrowRight size={20} className="text-purple-400 group-hover:translate-x-1 transition-transform relative z-10 flex-shrink-0" />
+              <ArrowRight size={18} className="text-purple-400 group-hover:translate-x-1 transition-transform flex-shrink-0" />
             </a>
 
-            {/* WhatsApp CTA */}
+            {/* WhatsApp */}
             <a
               href={WA_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative rounded-2xl p-5 overflow-hidden border border-emerald-500/20 flex items-center gap-4 transition-all duration-300 hover:border-emerald-500/40 hover:scale-[1.01]"
-              style={{ background: "linear-gradient(135deg, rgba(52,211,153,0.08) 0%, rgba(5,5,8,0.5) 100%)" }}
+              className="group rounded-2xl p-5 border border-emerald-200 flex items-center gap-4 transition-all duration-300 hover:border-emerald-300 hover:shadow-md"
+              style={{ background: "white" }}
             >
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "linear-gradient(135deg, #25d366, #128c7e)", boxShadow: "0 6px 20px rgba(37,211,102,0.3)" }}
+                style={{ background: "linear-gradient(135deg, #25d366, #128c7e)" }}
               >
                 <MessageCircle size={20} className="text-white" />
               </div>
               <div className="flex-1">
-                <p className="text-white font-bold text-base">WhatsApp</p>
+                <p className="text-gray-900 font-bold text-base">WhatsApp</p>
                 <p className="text-gray-400 text-sm">Réponse rapide garantie</p>
               </div>
-              <span className="text-xs font-bold text-emerald-400 px-2.5 py-1 rounded-full"
-                style={{ background: "rgba(52,211,153,0.1)", border: "1px solid rgba(52,211,153,0.2)" }}>
+              <span className="text-xs font-bold text-emerald-700 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200">
                 💬 Écrire
               </span>
             </a>
@@ -97,59 +93,48 @@ export default function Contact() {
             {/* Email */}
             <a
               href="mailto:contact@ombraie.agency"
-              className="group rounded-2xl p-5 border border-white/[0.07] flex items-center gap-4 transition-all duration-300 hover:border-white/15"
-              style={{ background: "rgba(255,255,255,0.02)" }}
+              className="group rounded-2xl p-5 border border-gray-200 flex items-center gap-4 transition-all duration-300 hover:border-purple-200 hover:shadow-md"
+              style={{ background: "white" }}
             >
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <Mail size={18} className="text-gray-400 group-hover:text-purple-300 transition-colors" />
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-gray-100">
+                <Mail size={18} className="text-gray-500 group-hover:text-purple-600 transition-colors" />
               </div>
               <div className="flex-1">
-                <p className="text-white font-semibold text-sm">contact@ombraie.agency</p>
-                <p className="text-gray-500 text-xs mt-0.5">Réponse sous 24h</p>
+                <p className="text-gray-900 font-semibold text-sm">contact@ombraie.agency</p>
+                <p className="text-gray-400 text-xs mt-0.5">Réponse sous 24h</p>
               </div>
-              <ArrowRight size={16} className="text-gray-600 group-hover:text-gray-400 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
+              <ArrowRight size={16} className="text-gray-300 group-hover:text-purple-400 group-hover:translate-x-0.5 transition-all flex-shrink-0" />
             </a>
 
             {/* Trust strip */}
             <div className="grid grid-cols-3 gap-3">
               {[
-                { icon: "🎁", label: "Audit offert" },
-                { icon: "⚡", label: "Réponse 24h" },
-                { icon: "🔓", label: "Sans engagement" },
+                { icon: "🎁", label: "Audit offert"       },
+                { icon: "⚡", label: "Réponse 24h"        },
+                { icon: "🔓", label: "Sans engagement"    },
               ].map((t) => (
-                <div key={t.label} className="flex flex-col items-center gap-1.5 p-3 rounded-xl border border-white/[0.06] text-center"
-                  style={{ background: "rgba(255,255,255,0.02)" }}>
+                <div key={t.label} className="flex flex-col items-center gap-1.5 p-3 rounded-xl border border-gray-100 text-center bg-white">
                   <span className="text-xl">{t.icon}</span>
-                  <span className="text-xs text-gray-400 font-semibold leading-tight">{t.label}</span>
+                  <span className="text-xs text-gray-500 font-semibold leading-tight">{t.label}</span>
                 </div>
               ))}
             </div>
 
-            {/* Fourchette de prix */}
-            <div
-              className="rounded-2xl p-5 border border-purple-500/15"
-              style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.07) 0%, rgba(5,5,8,0.5) 100%)" }}
+            {/* Link to pricing */}
+            <a
+              href="#portfolio"
+              className="group rounded-2xl p-5 border border-purple-100 flex items-center justify-between gap-4 hover:border-purple-200 transition-all duration-200"
+              style={{ background: "white" }}
             >
-              <p className="text-white font-bold text-sm mb-2">Une idée des tarifs</p>
-              <div className="flex flex-col gap-2">
-                {[
-                  { service: "Gestion réseaux sociaux", price: "à partir de 400€/mois" },
-                  { service: "Publicité en ligne (pub)", price: "à partir de 300€/mois" },
-                  { service: "Création de site vitrine", price: "à partir de 800€" },
-                  { service: "Boutique en ligne", price: "à partir de 1 500€" },
-                ].map((item) => (
-                  <div key={item.service} className="flex items-center justify-between gap-3 text-sm">
-                    <span className="text-gray-400">{item.service}</span>
-                    <span className="text-purple-300 font-semibold whitespace-nowrap">{item.price}</span>
-                  </div>
-                ))}
+              <div>
+                <p className="text-gray-900 font-bold text-sm mb-0.5">Voir nos tarifs détaillés</p>
+                <p className="text-gray-400 text-xs">Publicités, sites web & flyers · Transparents & sans surprise</p>
               </div>
-              <p className="text-gray-600 text-xs mt-3">Budget pub non inclus. Offres sur-mesure disponibles.</p>
-            </div>
+              <ArrowRight size={16} className="text-purple-400 group-hover:translate-x-1 transition-transform flex-shrink-0" />
+            </a>
           </motion.div>
 
-          {/* ── RIGHT — Formulaire simple ── */}
+          {/* RIGHT — Formulaire */}
           <motion.div
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -162,20 +147,19 @@ export default function Contact() {
                   key="ok"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="h-full rounded-3xl p-10 flex flex-col items-center justify-center gap-5 text-center border border-emerald-500/20"
-                  style={{ background: "linear-gradient(135deg, rgba(52,211,153,0.06), rgba(5,5,8,0.7))", minHeight: "400px" }}
+                  className="h-full rounded-3xl p-10 flex flex-col items-center justify-center gap-5 text-center border border-emerald-200"
+                  style={{ background: "white", minHeight: "400px", boxShadow: "0 4px 32px rgba(0,0,0,0.06)" }}
                 >
                   <div className="w-16 h-16 rounded-full flex items-center justify-center"
-                    style={{ background: "linear-gradient(135deg,#34d399,#0d9488)", boxShadow: "0 0 40px rgba(52,211,153,0.3)" }}>
+                    style={{ background: "linear-gradient(135deg, #34d399, #0d9488)" }}>
                     <Check size={28} className="text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-black text-white mb-2">Message reçu !</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">On vous rappelle sous 24h avec votre audit gratuit.</p>
+                    <h3 className="text-2xl font-black text-gray-900 mb-2">Message reçu !</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">On vous rappelle sous 24h avec votre audit gratuit.</p>
                   </div>
-                  <div className="flex items-center gap-2 text-emerald-400 text-sm font-semibold px-4 py-2 rounded-full"
-                    style={{ background: "rgba(52,211,153,0.1)", border: "1px solid rgba(52,211,153,0.2)" }}>
-                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <div className="flex items-center gap-2 text-emerald-700 text-sm font-semibold px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200">
+                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     Nous sommes disponibles
                   </div>
                 </motion.div>
@@ -183,17 +167,17 @@ export default function Contact() {
                 <motion.form
                   key="form"
                   onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-                  className="rounded-3xl p-6 md:p-8 border border-white/[0.07] flex flex-col gap-5"
-                  style={{ background: "rgba(255,255,255,0.02)" }}
+                  className="rounded-3xl p-6 md:p-8 border border-gray-100 flex flex-col gap-5"
+                  style={{ background: "white", boxShadow: "0 4px 32px rgba(0,0,0,0.06)" }}
                 >
                   <div>
-                    <h3 className="text-xl font-black text-white mb-1">Laissez-nous vos coordonnées</h3>
-                    <p className="text-gray-500 text-sm">30 secondes · On vous rappelle gratuitement sous 24h.</p>
+                    <h3 className="text-xl font-black text-gray-900 mb-1">Laissez-nous vos coordonnées</h3>
+                    <p className="text-gray-400 text-sm">30 secondes · On vous rappelle gratuitement sous 24h.</p>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Votre nom *</label>
+                      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Votre nom *</label>
                       <input
                         type="text" required placeholder="Jean Dupont"
                         value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -201,7 +185,7 @@ export default function Contact() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Email *</label>
+                      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Email *</label>
                       <input
                         type="email" required placeholder="jean@entreprise.com"
                         value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -211,9 +195,10 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">Votre activité en 2 mots</label>
+                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Votre activité en quelques mots</label>
                     <textarea
-                      rows={4} placeholder="Ex : je vends des produits en ligne et je veux plus de ventes..."
+                      rows={4}
+                      placeholder="Ex : je vends des produits en ligne et je veux plus de ventes..."
                       value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                       className={INPUT} style={{ resize: "none" }}
                     />
@@ -228,8 +213,9 @@ export default function Contact() {
                     <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
                   </button>
 
-                  <p className="text-xs text-gray-600 text-center">
-                    Ou appelez directement : <a href={PHONE_HREF} className="text-purple-400 font-semibold hover:text-purple-300">{PHONE}</a>
+                  <p className="text-xs text-gray-400 text-center">
+                    Ou appelez directement :{" "}
+                    <a href={PHONE_HREF} className="text-purple-600 font-semibold hover:text-purple-700">{PHONE}</a>
                   </p>
                 </motion.form>
               )}

@@ -1,124 +1,261 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Globe, TrendingUp, Share2, Megaphone, Palette, ShoppingBag } from "lucide-react";
 
 const services = [
   {
-    icon: "📱", number: "01", title: "Réseaux Sociaux",
-    desc: "On gère tout — publications, stories, reels, abonnés. Vous vous concentrez sur votre métier, on fait grandir votre audience.",
-    tags: ["Instagram", "TikTok", "Facebook", "LinkedIn"],
-    gradient: "from-purple-500 to-violet-700", glow: "rgba(124,58,237,0.2)",
+    num: "01",
+    tag: "WEB",
+    cat: "web",
+    Icon: Globe,
+    title: "Site Vitrine",
+    desc: "Design pro, mobile, rapide. Votre meilleur commercial en ligne, disponible 24h/24.",
+    price: "dès 499€",
   },
   {
-    icon: "🎯", number: "02", title: "Publicité en ligne",
-    desc: "On diffuse vos annonces aux bonnes personnes au bon moment, sur Facebook, Instagram et Google — pour attirer des clients prêts à acheter.",
-    tags: ["Facebook & Instagram", "Google", "Retargeting"],
-    gradient: "from-indigo-500 to-blue-700", glow: "rgba(79,70,229,0.2)",
+    num: "02",
+    tag: "SEO",
+    cat: "web",
+    Icon: TrendingUp,
+    title: "SEO Local",
+    desc: "Première position sur Google dans votre ville. Résultats visibles dès le 2e mois.",
+    price: "149€/mois",
   },
   {
-    icon: "🎬", number: "03", title: "Création de Contenu",
-    desc: "Visuels qui accrochent, vidéos qui font rester, textes qui donnent envie d'acheter — tout pensé pour votre clientèle.",
-    tags: ["Vidéos & Reels", "Visuels", "Textes"],
-    gradient: "from-violet-500 to-fuchsia-700", glow: "rgba(139,92,246,0.2)",
+    num: "03",
+    tag: "SOCIAL",
+    cat: "social",
+    Icon: Share2,
+    title: "Réseaux Sociaux",
+    desc: "Contenu régulier, visibilité locale, gestion complète. Instagram, Facebook et plus.",
+    price: "199€/mois",
   },
   {
-    icon: "🛒", number: "04", title: "Boutique en ligne",
-    desc: "Un site e-commerce beau, rapide et facile à utiliser. Vos clients commandent en quelques clics, vous encaissez.",
-    tags: ["Shopify", "WooCommerce", "Sur-mesure"],
-    gradient: "from-amber-500 to-orange-700", glow: "rgba(245,158,11,0.2)",
+    num: "04",
+    tag: "ADS",
+    cat: "social",
+    Icon: Megaphone,
+    title: "Publicité Ads",
+    desc: "Campagnes Google & Meta rentables, chaque euro investi est suivi et optimisé.",
+    price: "199€/mois",
   },
   {
-    icon: "🌐", number: "05", title: "Site Vitrine",
-    desc: "Votre carte de visite sur internet. Un site professionnel qui rassure vos visiteurs et les transforme en clients.",
-    tags: ["Design moderne", "Mobile", "Référencement"],
-    gradient: "from-teal-500 to-emerald-700", glow: "rgba(20,184,166,0.18)",
+    num: "05",
+    tag: "DESIGN",
+    cat: "identite",
+    Icon: Palette,
+    title: "Identité Visuelle",
+    desc: "Logo, flyers, cartes de visite. Une image professionnelle qui inspire confiance.",
+    price: "dès 70€",
   },
   {
-    icon: "🎨", number: "06", title: "Identité Visuelle",
-    desc: "Logo, couleurs, flyers, cartes de visite — une image cohérente et professionnelle qui marque les esprits.",
-    tags: ["Logo", "Flyers", "Cartes de visite"],
-    gradient: "from-pink-500 to-rose-700", glow: "rgba(236,72,153,0.18)",
+    num: "06",
+    tag: "E-COM",
+    cat: "web",
+    Icon: ShoppingBag,
+    title: "Boutique en Ligne",
+    desc: "Shopify clé en main. Vendez 24h/24 sans aucune contrainte technique.",
+    price: "dès 799€",
   },
 ];
 
+const filters = [
+  { label: "Tous", value: "all" },
+  { label: "Web & SEO", value: "web" },
+  { label: "Social & Ads", value: "social" },
+  { label: "Identité", value: "identite" },
+];
+
 export default function Services() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [active, setActive] = useState("all");
+
+  const filtered = active === "all" ? services : services.filter((s) => s.cat === active);
 
   return (
-    <section id="services" className="relative py-24 md:py-32 lg:py-40 overflow-hidden section-divider-top">
-      <div className="absolute inset-0 section-glow-left" />
-      <div className="absolute inset-0 section-glow-right" />
+    <section
+      id="services"
+      className="relative py-24 md:py-32 lg:py-40"
+      style={{ background: "#0e0e0e" }}
+    >
+      <div className="section-container">
 
-      <div ref={ref} className="section-container">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8 }} className="section-header">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-300 font-medium mb-5">✦ Nos Services</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-[1.05] mb-4">
-            Tout ce qu&apos;il faut pour<br /><span className="gradient-text">attirer plus de clients</span>
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.7 }}
+          className="section-header"
+        >
+          <span
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mb-5"
+            style={{
+              background: "rgba(124,58,237,0.12)",
+              border: "1px solid rgba(124,58,237,0.3)",
+              color: "#a855f7",
+            }}
+          >
+            ✦ Nos Services
+          </span>
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-black leading-[1.05] mb-4"
+            style={{ color: "#f5f5f5" }}
+          >
+            Tout ce qu&apos;il faut pour<br />
+            <span className="gradient-text">attirer plus de clients</span>
           </h2>
-          <p className="text-gray-400 text-base leading-relaxed">
-            Que vous démarriez de zéro ou que vous vouliez passer à la vitesse supérieure — on s&apos;occupe de votre présence en ligne de A à Z.
+          <p className="text-base leading-relaxed" style={{ color: "#666", maxWidth: "38rem" }}>
+            Que vous partiez de zéro ou que vous vouliez passer à la vitesse supérieure — on s&apos;occupe de tout.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6" style={{ alignItems: "start" }}>
-          {services.map((s, i) => (
-            <motion.div
-              key={s.number}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative glass rounded-2xl p-6 md:p-7 border border-white/[0.05] hover:border-white/10 transition-all duration-400 overflow-hidden"
-            >
-              <div className="absolute -inset-2 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl -z-10" style={{ background: s.glow }} />
-              <div className={`absolute top-0 left-5 right-5 h-px bg-gradient-to-r ${s.gradient} opacity-0 group-hover:opacity-100 transition-opacity`} />
-
-              <span className="text-xs font-bold text-purple-600/40 tracking-widest uppercase mb-4 block">{s.number}</span>
-
-              <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${s.gradient} flex items-center justify-center text-2xl mb-5 group-hover:scale-105 transition-transform duration-300`} style={{ boxShadow: `0 8px 24px ${s.glow}` }}>
-                {s.icon}
-              </div>
-
-              <h3 className="text-lg font-bold text-white mb-3 leading-tight group-hover:text-purple-100 transition-colors">{s.title}</h3>
-              <p className="text-gray-400 text-sm md:text-[15px] leading-relaxed mb-5 group-hover:text-gray-300 transition-colors">{s.desc}</p>
-
-              <div className="flex flex-wrap gap-1.5">
-                {s.tags.map((tag) => (
-                  <span key={tag} className="px-2.5 py-1 rounded-full text-xs font-medium text-gray-500 bg-white/[0.04] border border-white/[0.06] group-hover:text-purple-400 group-hover:border-purple-500/20 transition-all">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
+        {/* Filtres */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="flex flex-wrap justify-center gap-2 mb-12"
+        >
+          {filters.map((f) => (
+            <button
+              key={f.value}
+              onClick={() => setActive(f.value)}
+              className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer"
+              style={
+                active === f.value
+                  ? {
+                      background: "linear-gradient(135deg, #7c3aed, #a855f7)",
+                      color: "#fff",
+                      border: "1px solid transparent",
+                    }
+                  : {
+                      background: "transparent",
+                      color: "#888",
+                      border: "1px solid #2a2a2a",
+                    }
+              }
+            >
+              {f.label}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Grille */}
+        <motion.div
+          layout
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
+        >
+          <AnimatePresence mode="popLayout">
+            {filtered.map((s, i) => (
+              <motion.div
+                key={s.num}
+                layout
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                className="group relative overflow-hidden rounded-2xl p-7 cursor-pointer"
+                style={{
+                  background: "#161616",
+                  border: "1px solid #232323",
+                  transition: "border-color 0.25s",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(124,58,237,0.4)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLDivElement).style.borderColor = "#232323";
+                }}
+              >
+                {/* Numéro de fond */}
+                <span
+                  className="absolute top-4 right-5 font-black select-none pointer-events-none"
+                  style={{
+                    fontSize: "72px",
+                    lineHeight: 1,
+                    color: "rgba(255,255,255,0.04)",
+                    fontVariantNumeric: "tabular-nums",
+                  }}
+                  aria-hidden="true"
+                >
+                  {s.num}
+                </span>
+
+                {/* Badge catégorie */}
+                <span
+                  className="inline-block px-2.5 py-1 rounded text-[10px] font-bold tracking-widest mb-5"
+                  style={{
+                    border: "1px solid rgba(124,58,237,0.35)",
+                    color: "#a855f7",
+                    background: "rgba(124,58,237,0.08)",
+                  }}
+                >
+                  {s.tag}
+                </span>
+
+                {/* Icône */}
+                <div
+                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
+                  style={{ background: "#1f1f1f", border: "1px solid #2a2a2a" }}
+                >
+                  <s.Icon size={19} style={{ color: "#a855f7" }} />
+                </div>
+
+                {/* Titre */}
+                <h3
+                  className="text-[17px] font-bold mb-2.5"
+                  style={{ color: "#f0f0f0" }}
+                >
+                  {s.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm leading-relaxed mb-6" style={{ color: "#666", minHeight: "48px" }}>
+                  {s.desc}
+                </p>
+
+                {/* Prix + flèche */}
+                <div className="flex items-center justify-between">
+                  <span
+                    className="text-[15px] font-bold"
+                    style={{ color: "#a855f7" }}
+                  >
+                    {s.price}
+                  </span>
+                  <span
+                    className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 group-hover:translate-x-0.5"
+                    style={{ background: "#1f1f1f", border: "1px solid #2a2a2a" }}
+                  >
+                    <ArrowRight size={14} style={{ color: "#555" }} />
+                  </span>
+                </div>
+
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* CTA bas */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 md:mt-16"
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex justify-center mt-14"
         >
           <a
             href="#contact"
-            className="group relative inline-flex items-center gap-2.5 px-8 py-4 text-sm font-bold text-white rounded-xl overflow-hidden"
+            className="group relative inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold text-white rounded-full overflow-hidden"
           >
             <span className="absolute inset-0 shimmer-btn" />
             <span className="relative z-10">Discutons de votre projet</span>
-            <ArrowRight size={16} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-          </a>
-          <a
-            href="#processus"
-            className="text-sm text-gray-400 hover:text-white transition-colors font-medium flex items-center gap-1.5 group"
-          >
-            Voir notre méthode
-            <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
+            <ArrowRight size={14} className="relative z-10 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
+
       </div>
     </section>
   );
