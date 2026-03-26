@@ -33,7 +33,7 @@ async function fetchRealisations(): Promise<Realisation[]> {
           apikey: key,
           Authorization: `Bearer ${key}`,
         },
-        next: { revalidate: 60 },
+        cache: "no-store",
       }
     );
     if (!res.ok) return [];
