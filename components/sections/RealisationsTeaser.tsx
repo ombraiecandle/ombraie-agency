@@ -120,13 +120,7 @@ export default function RealisationsTeaser() {
         </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="flex flex-col items-center gap-3"
-        >
+        <div className="flex flex-col items-center gap-3">
           <Link
             href="/realisations"
             className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-sm font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
@@ -141,7 +135,7 @@ export default function RealisationsTeaser() {
           <p className="text-gray-400 text-xs">
             Publicités · Sites web · Flyers — avec tarifs transparents
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -97,7 +97,7 @@ export default function Footer() {
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <p className="text-xs text-gray-400">Disponible pour nouveaux projets</p>
             </div>
-            <a href="/admin" className="text-xs text-gray-300 hover:text-gray-500 transition-colors">Admin</a>
+            <a href="/admin" className="text-xs text-gray-400 hover:text-purple-700 font-medium transition-colors border border-gray-200 hover:border-purple-200 px-2.5 py-1 rounded-full">Espace Admin</a>
           </div>
         </div>
       </div>
