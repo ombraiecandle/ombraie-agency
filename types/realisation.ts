@@ -2,35 +2,37 @@ export type RealisationCategory = "ads" | "sites" | "flyers";
 
 export interface AdsData {
   client: string;
-  sector: string;
+  sector?: string;
   platform: string;
-  duration: string;
-  roas: string;
-  ca: string;
+  duration?: string;
+  roas?: string;
+  ca?: string;
   impressions?: string;
   clicks?: string;
   ctr?: string;
   cpc?: string;
   accent: string;
+  image_url?: string;
 }
 
 export interface SiteData {
   name: string;
-  url: string;
+  url?: string;
   type: "Site Vitrine" | "E-commerce";
-  sector: string;
-  delivery_time: string;
-  price: string;
+  sector?: string;
+  delivery_time?: string;
+  price?: string;
   testimonial?: string;
   accent: string;
+  image_url?: string;
 }
 
 export interface FlyerData {
   brand: string;
   type: string;
   prints?: string;
-  delivery_time: string;
-  price: string;
+  delivery_time?: string;
+  price?: string;
   color1: string;
   color2: string;
   tag?: string;
@@ -38,6 +40,7 @@ export interface FlyerData {
   promo?: string;
   address?: string;
   phone?: string;
+  image_url?: string;
 }
 
 export type RealisationData = AdsData | SiteData | FlyerData;

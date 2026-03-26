@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
   TrendingUp, Monitor, Palette, Plus, Trash2, Eye, EyeOff,
-  LogOut, Lock, Loader2, X, Check, AlertCircle,
+  LogOut, Lock, Loader2, X, Check, AlertCircle, ImagePlus,
 } from "lucide-react";
 import type { Realisation, RealisationCategory, AdsData, SiteData, FlyerData } from "@/types/realisation";
 import OmbraieLogoSVG from "@/components/ui/OmbraieLogoSVG";
@@ -73,6 +73,78 @@ function LoginScreen({ onLogin }: { onLogin: (token: string) => void }) {
           </button>
         </form>
       </div>
+    </div>
+  );
+}
+
+// ─── IMAGE UPLOAD ─────────────────────────────────────────────
+
+function ImageUpload({ value, onChange, token }: { value?: string; onChange: (url: string) => void; token: string }) {
+  const ref = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState("");
+
+  const upload = async (file: File) => {
+    setUploading(true);
+    setError("");
+    const form = new FormData();
+    form.append("file", file);
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: form,
+    });
+    setUploading(false);
+    if (!res.ok) {
+      const j = await res.json();
+      setError(j.error ?? "Erreur upload");
+      return;
+    }
+    const { url } = await res.json();
+    onChange(url);
+  };
+
+  return (
+    <div>
+      <label className="block text-xs font-semibold text-gray-600 mb-1.5">Image (optionnel)</label>
+      <div
+        className="relative border-2 border-dashed rounded-xl overflow-hidden cursor-pointer transition-all"
+        style={{ borderColor: value ? "#7c3aed40" : "#e5e7eb", background: value ? "transparent" : "#f9fafb" }}
+        onClick={() => ref.current?.click()}
+      >
+        {value ? (
+          <div className="relative">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={value} alt="preview" className="w-full h-40 object-cover" />
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); onChange(""); }}
+              className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/50 flex items-center justify-center text-white hover:bg-black/70 transition-colors"
+            >
+              <X size={13} />
+            </button>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-8 gap-2 text-gray-400">
+            {uploading ? <Loader2 size={22} className="animate-spin text-purple-600" /> : <ImagePlus size={22} />}
+            <span className="text-xs">{uploading ? "Upload en cours..." : "Cliquer pour ajouter une image"}</span>
+          </div>
+        )}
+      </div>
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+      {/* URL manuel comme fallback */}
+      <input
+        type="url"
+        value={value ?? ""}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Ou coller une URL d'image..."
+        className="w-full mt-2 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-700 placeholder-gray-400 focus:outline-none focus:border-purple-400 transition-all"
+        onClick={(e) => e.stopPropagation()}
+      />
+      <input ref={ref} type="file" accept="image/*" className="hidden" onChange={(e) => {
+        const f = e.target.files?.[0];
+        if (f) upload(f);
+      }} />
     </div>
   );
 }
@@ -160,50 +232,33 @@ function SelectField({
 }
 
 // Ads Form
-function AdsForm({ initial, onSubmit, loading }: {
-  initial?: AdsData;
-  onSubmit: (d: AdsData) => void;
-  loading: boolean;
+function AdsForm({ initial, onSubmit, loading, token }: {
+  initial?: AdsData; onSubmit: (d: AdsData) => void; loading: boolean; token: string;
 }) {
   const [d, setD] = useState<AdsData>(initial ?? {
-    client: "", sector: "", platform: "Facebook & Instagram Ads",
-    duration: "", roas: "", ca: "", impressions: "", clicks: "",
-    ctr: "", cpc: "", accent: "#7c3aed",
+    client: "", platform: "Facebook & Instagram Ads", accent: "#7c3aed",
   });
   const set = (k: keyof AdsData) => (v: string) => setD((p) => ({ ...p, [k]: v }));
-
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSubmit(d); }} className="flex flex-col gap-4">
+      <ImageUpload value={d.image_url} onChange={(url) => setD((p) => ({ ...p, image_url: url }))} token={token} />
+      <InputField label="Client *" name="client" value={d.client} onChange={set("client")} placeholder="Boutique Mode" required />
       <div className="grid grid-cols-2 gap-4">
-        <InputField label="Client" name="client" value={d.client} onChange={set("client")} placeholder="Boutique Mode" required />
-        <InputField label="Secteur" name="sector" value={d.sector} onChange={set("sector")} placeholder="Vêtements · Toulouse" required />
-      </div>
-      <SelectField
-        label="Plateforme"
-        value={d.platform}
-        onChange={set("platform")}
-        options={[
+        <InputField label="Secteur" name="sector" value={d.sector ?? ""} onChange={set("sector")} placeholder="Vêtements · Toulouse" />
+        <SelectField label="Plateforme" value={d.platform} onChange={set("platform")} options={[
           { label: "Facebook & Instagram Ads", value: "Facebook & Instagram Ads" },
-          { label: "Facebook Ads", value: "Facebook Ads" },
           { label: "Google Ads", value: "Google Ads" },
-          { label: "Instagram Ads", value: "Instagram Ads" },
           { label: "Meta + Google Ads", value: "Meta + Google Ads" },
           { label: "TikTok Ads", value: "TikTok Ads" },
-        ]}
-        required
-      />
-      <InputField label="Durée & budget" name="duration" value={d.duration} onChange={set("duration")} placeholder="3 mois · 800€/mois" required />
-      <div className="grid grid-cols-2 gap-4">
-        <InputField label="ROAS (ex: 4.8)" name="roas" value={d.roas} onChange={set("roas")} placeholder="4.8" required />
-        <InputField label="CA généré (€)" name="ca" value={d.ca} onChange={set("ca")} placeholder="22400" required />
+        ]} />
       </div>
       <div className="grid grid-cols-2 gap-4">
+        <InputField label="ROAS (ex: 4.8)" name="roas" value={d.roas ?? ""} onChange={set("roas")} placeholder="4.8" />
+        <InputField label="CA généré (€)" name="ca" value={d.ca ?? ""} onChange={set("ca")} placeholder="22400" />
+      </div>
+      <div className="grid grid-cols-2 gap-4">
+        <InputField label="Durée & budget" name="duration" value={d.duration ?? ""} onChange={set("duration")} placeholder="3 mois · 800€/mois" />
         <InputField label="Impressions" name="impressions" value={d.impressions ?? ""} onChange={set("impressions")} placeholder="124 000" />
-        <InputField label="Clics" name="clicks" value={d.clicks ?? ""} onChange={set("clicks")} placeholder="3 870" />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <InputField label="Taux de clic (%)" name="ctr" value={d.ctr ?? ""} onChange={set("ctr")} placeholder="3.12" />
-        <InputField label="Coût/clic (€)" name="cpc" value={d.cpc ?? ""} onChange={set("cpc")} placeholder="0.62" />
       </div>
       <div>
         <label className="block text-xs font-semibold text-gray-600 mb-1.5">Couleur accent</label>
@@ -215,39 +270,30 @@ function AdsForm({ initial, onSubmit, loading }: {
 }
 
 // Sites Form
-function SitesForm({ initial, onSubmit, loading }: {
-  initial?: SiteData;
-  onSubmit: (d: SiteData) => void;
-  loading: boolean;
+function SitesForm({ initial, onSubmit, loading, token }: {
+  initial?: SiteData; onSubmit: (d: SiteData) => void; loading: boolean; token: string;
 }) {
   const [d, setD] = useState<SiteData>(initial ?? {
-    name: "", url: "", type: "Site Vitrine", sector: "",
-    delivery_time: "", price: "", testimonial: "", accent: "#0284c7",
+    name: "", type: "Site Vitrine", accent: "#0284c7",
   });
   const set = (k: keyof SiteData) => (v: string) => setD((p) => ({ ...p, [k]: v }));
-
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSubmit(d); }} className="flex flex-col gap-4">
+      <ImageUpload value={d.image_url} onChange={(url) => setD((p) => ({ ...p, image_url: url }))} token={token} />
       <div className="grid grid-cols-2 gap-4">
-        <InputField label="Nom du client" name="name" value={d.name} onChange={set("name")} placeholder="Art & Maison Rénovation" required />
-        <InputField label="URL du site" name="url" value={d.url} onChange={set("url")} placeholder="monsite.fr" required />
+        <InputField label="Nom du client *" name="name" value={d.name} onChange={set("name")} placeholder="Art & Maison Rénovation" required />
+        <SelectField label="Type" value={d.type} onChange={set("type")} options={[
+          { label: "Site Vitrine", value: "Site Vitrine" },
+          { label: "E-commerce", value: "E-commerce" },
+        ]} />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <SelectField
-          label="Type"
-          value={d.type}
-          onChange={set("type")}
-          options={[
-            { label: "Site Vitrine", value: "Site Vitrine" },
-            { label: "E-commerce", value: "E-commerce" },
-          ]}
-          required
-        />
-        <InputField label="Secteur" name="sector" value={d.sector} onChange={set("sector")} placeholder="Artisan bâtiment" required />
+        <InputField label="URL du site" name="url" value={d.url ?? ""} onChange={set("url")} placeholder="monsite.fr" />
+        <InputField label="Secteur" name="sector" value={d.sector ?? ""} onChange={set("sector")} placeholder="Artisan bâtiment" />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <InputField label="Délai livraison" name="delivery_time" value={d.delivery_time} onChange={set("delivery_time")} placeholder="3 semaines" required />
-        <InputField label="Prix (€)" name="price" value={d.price} onChange={set("price")} placeholder="1200" required />
+        <InputField label="Délai livraison" name="delivery_time" value={d.delivery_time ?? ""} onChange={set("delivery_time")} placeholder="3 semaines" />
+        <InputField label="Prix (€)" name="price" value={d.price ?? ""} onChange={set("price")} placeholder="1200" />
       </div>
       <InputField label="Témoignage client" name="testimonial" value={d.testimonial ?? ""} onChange={set("testimonial")} placeholder="Travail impeccable, très professionnel..." />
       <div>
@@ -260,94 +306,34 @@ function SitesForm({ initial, onSubmit, loading }: {
 }
 
 // Flyers Form
-function FlyersForm({ initial, onSubmit, loading }: {
-  initial?: FlyerData;
-  onSubmit: (d: FlyerData) => void;
-  loading: boolean;
+function FlyersForm({ initial, onSubmit, loading, token }: {
+  initial?: FlyerData; onSubmit: (d: FlyerData) => void; loading: boolean; token: string;
 }) {
   const [d, setD] = useState<FlyerData>(initial ?? {
-    brand: "", type: "Flyer A5 Recto/Verso", prints: "",
-    delivery_time: "", price: "", color1: "#7c3aed", color2: "#a855f7",
-    tag: "", promo: "", address: "", phone: "",
-    offers: [{ label: "", price: "" }],
+    brand: "", type: "Flyer A5 Recto/Verso", color1: "#7c3aed", color2: "#a855f7",
   });
   const set = (k: keyof FlyerData) => (v: string) => setD((p) => ({ ...p, [k]: v }));
-
-  const setOffer = (i: number, field: "label" | "price", v: string) =>
-    setD((p) => {
-      const offers = [...(p.offers ?? [])];
-      offers[i] = { ...offers[i], [field]: v };
-      return { ...p, offers };
-    });
-
-  const addOffer = () =>
-    setD((p) => ({ ...p, offers: [...(p.offers ?? []), { label: "", price: "" }] }));
-
-  const removeOffer = (i: number) =>
-    setD((p) => ({ ...p, offers: (p.offers ?? []).filter((_, idx) => idx !== i) }));
-
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSubmit(d); }} className="flex flex-col gap-4">
+      <ImageUpload value={d.image_url} onChange={(url) => setD((p) => ({ ...p, image_url: url }))} token={token} />
       <div className="grid grid-cols-2 gap-4">
-        <InputField label="Marque / Client" name="brand" value={d.brand} onChange={set("brand")} placeholder="Restaurant Le Gaulois" required />
-        <SelectField
-          label="Type de création"
-          value={d.type}
-          onChange={set("type")}
-          options={[
-            { label: "Flyer A5 Recto", value: "Flyer A5 Recto" },
-            { label: "Flyer A5 Recto/Verso", value: "Flyer A5 Recto/Verso" },
-            { label: "Flyer A4 Recto", value: "Flyer A4 Recto" },
-            { label: "Affiche A3", value: "Affiche A3" },
-            { label: "Pack Complet", value: "Pack Complet" },
-            { label: "Format Réseaux Sociaux", value: "Format Réseaux Sociaux" },
-          ]}
-          required
-        />
+        <InputField label="Marque / Client *" name="brand" value={d.brand} onChange={set("brand")} placeholder="Restaurant Le Gaulois" required />
+        <SelectField label="Type" value={d.type} onChange={set("type")} options={[
+          { label: "Flyer A5 Recto", value: "Flyer A5 Recto" },
+          { label: "Flyer A5 Recto/Verso", value: "Flyer A5 Recto/Verso" },
+          { label: "Flyer A4 Recto", value: "Flyer A4 Recto" },
+          { label: "Affiche A3", value: "Affiche A3" },
+          { label: "Pack Complet", value: "Pack Complet" },
+          { label: "Format Réseaux Sociaux", value: "Format Réseaux Sociaux" },
+        ]} />
       </div>
-      <div className="grid grid-cols-3 gap-4">
-        <InputField label="Exemplaires" name="prints" value={d.prints ?? ""} onChange={set("prints")} placeholder="500 ex." />
-        <InputField label="Délai livraison" name="delivery_time" value={d.delivery_time} onChange={set("delivery_time")} placeholder="4 jours" required />
-        <InputField label="Prix (€)" name="price" value={d.price} onChange={set("price")} placeholder="220" required />
+      <div className="grid grid-cols-2 gap-4">
+        <InputField label="Délai livraison" name="delivery_time" value={d.delivery_time ?? ""} onChange={set("delivery_time")} placeholder="4 jours" />
+        <InputField label="Prix (€)" name="price" value={d.price ?? ""} onChange={set("price")} placeholder="220" />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <InputField label="Tag / Accroche" name="tag" value={d.tag ?? ""} onChange={set("tag")} placeholder="–20% ce weekend" />
-        <InputField label="Ligne promo" name="promo" value={d.promo ?? ""} onChange={set("promo")} placeholder="–20% sur toute la carte" />
-      </div>
-      <div>
-        <div className="flex items-center justify-between mb-2">
-          <label className="text-xs font-semibold text-gray-600">Offres / Prestations</label>
-          {(d.offers?.length ?? 0) < 3 && (
-            <button type="button" onClick={addOffer} className="text-xs text-purple-700 font-semibold hover:text-purple-800">
-              + Ajouter
-            </button>
-          )}
-        </div>
-        <div className="flex flex-col gap-2">
-          {(d.offers ?? []).map((o, i) => (
-            <div key={i} className="flex gap-2">
-              <input
-                type="text" value={o.label} onChange={(e) => setOffer(i, "label", e.target.value)}
-                placeholder="Libellé (ex: Formule déjeuner)"
-                className="flex-1 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:border-purple-400 transition-all"
-              />
-              <input
-                type="text" value={o.price} onChange={(e) => setOffer(i, "price", e.target.value)}
-                placeholder="Prix"
-                className="w-24 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm placeholder-gray-400 focus:outline-none focus:border-purple-400 transition-all"
-              />
-              {(d.offers?.length ?? 0) > 1 && (
-                <button type="button" onClick={() => removeOffer(i)} className="text-gray-400 hover:text-red-500 transition-colors">
-                  <X size={14} />
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="grid grid-cols-2 gap-4">
-        <InputField label="Adresse" name="address" value={d.address ?? ""} onChange={set("address")} placeholder="12 rue de la Mairie, Pamiers" />
-        <InputField label="Téléphone" name="phone" value={d.phone ?? ""} onChange={set("phone")} placeholder="05 61 27 44 10" />
+        <InputField label="Exemplaires" name="prints" value={d.prints ?? ""} onChange={set("prints")} placeholder="500 ex." />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -441,9 +427,9 @@ function Modal({
               {error}
             </div>
           )}
-          {cat === "ads" && <AdsForm initial={editing?.data as AdsData} onSubmit={save} loading={loading} />}
-          {cat === "sites" && <SitesForm initial={editing?.data as SiteData} onSubmit={save} loading={loading} />}
-          {cat === "flyers" && <FlyersForm initial={editing?.data as FlyerData} onSubmit={save} loading={loading} />}
+          {cat === "ads" && <AdsForm initial={editing?.data as AdsData} onSubmit={save} loading={loading} token={token} />}
+          {cat === "sites" && <SitesForm initial={editing?.data as SiteData} onSubmit={save} loading={loading} token={token} />}
+          {cat === "flyers" && <FlyersForm initial={editing?.data as FlyerData} onSubmit={save} loading={loading} token={token} />}
         </div>
       </div>
     </div>

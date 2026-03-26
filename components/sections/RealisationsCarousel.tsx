@@ -1006,7 +1006,7 @@ const selectors: {
 function DynamicAdCard({ r }: { r: Realisation }) {
   const d = r.data as AdsData;
   const accent = d.accent || "#7c3aed";
-  const roas = parseFloat(d.roas) || 2;
+  const roas = parseFloat(d.roas ?? "0") || 2;
   const bars = Array.from({ length: 12 }, (_, i) => {
     const t = i / 11;
     return Math.min(100, Math.round(18 + t * 64 + (t > 0.6 ? (t - 0.6) * roas * 45 : 0)));
