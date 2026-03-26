@@ -17,11 +17,11 @@ export async function POST(req: NextRequest) {
   const bytes = await file.arrayBuffer();
 
   const { error } = await supabaseAdmin.storage
-    .from("realisations")
+    .from("realisation")
     .upload(filename, bytes, { contentType: file.type, upsert: false });
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-  const { data } = supabaseAdmin.storage.from("realisations").getPublicUrl(filename);
+  const { data } = supabaseAdmin.storage.from("realisation").getPublicUrl(filename);
   return NextResponse.json({ url: data.publicUrl });
 }
