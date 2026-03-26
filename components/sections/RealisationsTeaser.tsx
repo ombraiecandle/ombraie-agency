@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ArrowRight, TrendingUp, Monitor, Palette } from "lucide-react";
 import Link from "next/link";
 
@@ -48,13 +45,7 @@ export default function RealisationsTeaser() {
     >
       <div className="section-container">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.6 }}
-          className="section-header"
-        >
+        <div className="section-header">
           <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-purple text-xs text-purple-700 font-semibold mb-5">
             ✦ Nos Réalisations
           </span>
@@ -67,17 +58,13 @@ export default function RealisationsTeaser() {
             Publicités, sites web, créations graphiques — voici ce qu&apos;on
             a accompli pour nos clients locaux.
           </p>
-        </motion.div>
+        </div>
 
         {/* Highlight cards */}
         <div className="grid md:grid-cols-3 gap-5 md:gap-6 mb-12">
-          {highlights.map((h, i) => (
-            <motion.div
+          {highlights.map((h) => (
+            <div
               key={h.category}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
               className="rounded-2xl p-6 flex flex-col gap-5"
               style={{
                 background: h.bg,
@@ -115,7 +102,7 @@ export default function RealisationsTeaser() {
                 <p className="text-gray-900 font-bold text-sm">{h.client}</p>
                 <p className="text-gray-400 text-xs mt-0.5">{h.detail}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
