@@ -276,7 +276,30 @@ function SitesForm({ initial, onSubmit, loading, token }: {
   const [d, setD] = useState<SiteData>(initial ?? {
     name: "", type: "Site Vitrine", accent: "#0284c7",
   });
+  const [screenshotLoading, setScreenshotLoading] = useState(false);
   const set = (k: keyof SiteData) => (v: string) => setD((p) => ({ ...p, [k]: v }));
+
+  const captureScreenshot = async () => {
+    const raw = d.url?.trim();
+    if (!raw) return;
+    const full = raw.startsWith("http") ? raw : `https://${raw}`;
+    setScreenshotLoading(true);
+    // Force le service à régénérer la capture (évite le cache)
+    const screenshotUrl = `https://s0.wp.com/mshots/v1/${encodeURIComponent(full)}?w=1200&h=800&vp=1440x900`;
+    // Préchargement pour vérifier que l'image est disponible
+    const img = new Image();
+    img.onload = () => {
+      setD((p) => ({ ...p, image_url: screenshotUrl }));
+      setScreenshotLoading(false);
+    };
+    img.onerror = () => {
+      // mShots peut retourner une image grise lors de la première requête — on l'utilise quand même
+      setD((p) => ({ ...p, image_url: screenshotUrl }));
+      setScreenshotLoading(false);
+    };
+    img.src = screenshotUrl;
+  };
+
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSubmit(d); }} className="flex flex-col gap-4">
       <ImageUpload value={d.image_url} onChange={(url) => setD((p) => ({ ...p, image_url: url }))} token={token} />
@@ -288,7 +311,31 @@ function SitesForm({ initial, onSubmit, loading, token }: {
         ]} />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <InputField label="URL du site" name="url" value={d.url ?? ""} onChange={set("url")} placeholder="monsite.fr" />
+        <div>
+          <label className="block text-xs font-semibold text-gray-600 mb-1.5">URL du site</label>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={d.url ?? ""}
+              onChange={(e) => set("url")(e.target.value)}
+              placeholder="monsite.fr"
+              className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:border-purple-400 focus:bg-white transition-all"
+            />
+            <button
+              type="button"
+              onClick={captureScreenshot}
+              disabled={!d.url?.trim() || screenshotLoading}
+              title="Générer une capture d'écran automatique"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-white disabled:opacity-40 transition-opacity flex-shrink-0"
+              style={{ background: "linear-gradient(135deg, #7c3aed, #6d28d9)" }}
+            >
+              {screenshotLoading ? <Loader2 size={13} className="animate-spin" /> : "📸"}
+            </button>
+          </div>
+          {d.url?.trim() && !d.image_url && (
+            <p className="text-xs text-purple-500 mt-1">Clique sur 📸 pour capturer le site automatiquement</p>
+          )}
+        </div>
         <InputField label="Secteur" name="sector" value={d.sector ?? ""} onChange={set("sector")} placeholder="Artisan bâtiment" />
       </div>
       <div className="grid grid-cols-2 gap-4">
